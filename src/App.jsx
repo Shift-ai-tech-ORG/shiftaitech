@@ -26,7 +26,22 @@ import {
 } from 'lucide-react'
 import { Container, SectionLabel, SectionHeading, Button, Card } from './components/ui'
 import ContactForm from './components/ContactForm'
+import { keyMessages, caseStudyCategories, portfolio as portfolioData } from './data/projects'
 import './App.css'
+
+const portfolioIcons = {
+  Shield,
+  GraduationCap,
+  Utensils,
+  Users,
+  Activity,
+  Search,
+}
+
+const portfolio = portfolioData.map((p) => ({
+  ...p,
+  icon: portfolioIcons[p.iconKey],
+}))
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -81,45 +96,6 @@ const services = [
     title: 'AI Strategy',
     description: 'We map the opportunity, identify the highest-ROI use cases, build the roadmap, and give you a clear picture of cost and timeline before you commit.',
     img: IMG.meeting,
-  },
-]
-
-const portfolio = [
-  {
-    icon: Shield,
-    sector: 'Compliance & Finance',
-    partner: 'AML Intelligence Suite',
-    description: 'Automated Anti-Money Laundering reporting platform for accountancy firms. Monitors transaction data, flags suspicious patterns with ML, and generates regulator-ready reports — reducing compliance workload from days to hours.',
-    tags: ['AML Reporting', 'Compliance Automation', 'Financial Crime Detection'],
-    quote: 'What used to take our compliance team three days now takes under two hours. The accuracy and audit trail are exceptional.',
-    reference: 'Compliance Director, Mid-Sized Accountancy Practice',
-  },
-  {
-    icon: GraduationCap,
-    sector: 'Learning & Development',
-    partner: 'AI Course Delivery Platform',
-    description: 'End-to-end AI-powered content delivery for professional training providers. Courses scripted, narrated, and delivered by AI avatar instructors — scaling L&D without studio costs or scheduling constraints.',
-    tags: ['AI Avatars', 'Course Delivery', 'Content Automation'],
-    quote: 'We went from concept to a fully accredited, AI-delivered course catalogue in eight weeks. The cost saving versus traditional production is significant.',
-    reference: 'Head of Learning & Development, Professional Training Provider',
-  },
-  {
-    icon: Utensils,
-    sector: 'Health & Fitness',
-    partner: 'Smart Kitchen & Nutrition Planner',
-    description: 'AI-powered kitchen inventory tracker and meal planning system. Tracks pantry stock, designs macro-balanced meal plans aligned to fitness goals, and generates budget-optimised shopping lists.',
-    tags: ['Nutrition AI', 'Meal Planning', 'Fitness Optimisation'],
-    quote: 'Users report saving an average of £60 per month on groceries while hitting their nutrition targets more consistently than before.',
-    reference: 'Founder, Fitness & Nutrition App',
-  },
-  {
-    icon: Users,
-    sector: 'Customer Success & SaaS',
-    partner: 'Churn Prediction & Retention Engine',
-    description: 'Predictive ML platform that identifies at-risk subscribers up to 60 days before churn, triggers personalised retention workflows, and surfaces the usage signals correlated with cancellation.',
-    tags: ['Churn Prediction', 'Retention Automation', 'Predictive ML'],
-    quote: 'Churn rate dropped 23% in the first quarter after deployment. The early-warning signals have completely changed how our CS team prioritises.',
-    reference: 'Head of Customer Success, B2B SaaS Platform',
   },
 ]
 
@@ -301,23 +277,64 @@ function App() {
             <SectionLabel>Proven Track Record</SectionLabel>
             <SectionHeading>Portfolio of Projects &amp; Partners</SectionHeading>
             <p className="section-intro">
-              Sector agnostic. Proven solutions across compliance, learning &amp; development, health &amp; fitness, SaaS, and financial markets.
+              Sector agnostic. Proven solutions across compliance, learning &amp; development, health &amp; life science, SaaS, and financial markets.
             </p>
           </motion.div>
+
+          <motion.div className="key-messages" {...fadeUp}>
+            <p className="key-messages-label">Key messages</p>
+            <ul className="key-messages-list">
+              {keyMessages.map((msg) => (
+                <li key={msg}>{msg}</li>
+              ))}
+            </ul>
+          </motion.div>
+
+          <motion.div className="case-study-categories" {...fadeUp}>
+            <p className="case-study-categories-label">AI case study examples</p>
+            <div className="case-study-categories-grid">
+              {caseStudyCategories.map((cat) => (
+                <a key={cat.id} href={`#case-study-${cat.id}`} className="case-study-category">
+                  {cat.label}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+
           <div className="portfolio-grid">
             {portfolio.map((p, i) => (
-              <motion.div key={i} {...stagger(i)}>
+              <motion.div key={p.id} id={`case-study-${p.id}`} {...stagger(i)}>
                 <Card className="portfolio-card">
                   <div className="portfolio-card-top">
                     <span className="portfolio-sector">{p.sector}</span>
                     <p.icon size={22} strokeWidth={1.5} className="portfolio-icon" />
                   </div>
+                  <p className="portfolio-category">{p.category}</p>
                   <h3 className="portfolio-name">{p.partner}</h3>
                   <p className="portfolio-desc">{p.description}</p>
                   <div className="portfolio-quote">
                     <p className="portfolio-quote-text">&ldquo;{p.quote}&rdquo;</p>
                     <p className="portfolio-quote-ref">{p.reference}</p>
                   </div>
+                  {(p.github || p.live || p.poc) && (
+                    <div className="portfolio-links">
+                      {p.live && (
+                        <a href={p.live} target="_blank" rel="noopener noreferrer" className="portfolio-link">
+                          Live app <ArrowRight size={14} />
+                        </a>
+                      )}
+                      {p.github && (
+                        <a href={p.github} target="_blank" rel="noopener noreferrer" className="portfolio-link">
+                          GitHub <ArrowRight size={14} />
+                        </a>
+                      )}
+                      {p.poc && (
+                        <a href={p.poc} target="_blank" rel="noopener noreferrer" className="portfolio-link portfolio-link--muted">
+                          POC demo <ArrowRight size={14} />
+                        </a>
+                      )}
+                    </div>
+                  )}
                   <div className="portfolio-tags">
                     {p.tags.map((t) => <span key={t} className="tag">{t}</span>)}
                   </div>
