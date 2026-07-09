@@ -27,6 +27,7 @@ export const portfolio = [
     quote:
       'What used to take our compliance team three days now takes under two hours. The accuracy and audit trail are exceptional.',
     reference: 'Compliance Director, Mid-Sized Accountancy Practice',
+    images: ['/case-studies/braid-aml.jpg'],
   },
   {
     id: 'lnd',
@@ -40,6 +41,11 @@ export const portfolio = [
     quote:
       'We went from concept to a fully accredited, AI-delivered course catalogue in eight weeks. The cost saving versus traditional production is significant.',
     reference: 'Head of Learning & Development, Professional Training Provider',
+    images: [
+      '/case-studies/deep-space-1.jpg',
+      '/case-studies/deep-space-3.jpg',
+      '/case-studies/deep-space-2.jpg',
+    ],
   },
   {
     id: 'biosense',
@@ -51,11 +57,10 @@ export const portfolio = [
       'Full-stack personalised health intelligence platform built by Shift AI Tech. Users upload blood results, connect wearables (Oura, Whoop, Garmin, Apple Health), and complete daily check-ins — Claude AI analyses biomarkers, detects patterns, and delivers tiered health insights with weekly reports.',
     tags: ['Claude AI', 'Wearable Integration', 'Biomarker Analysis', 'Next.js'],
     quote:
-      'From interactive POC to production on Google Cloud Run — auth, PDF analysis, Stripe billing, and wearable OAuth in one continuous health intelligence product.',
-    reference: 'Shift AI Tech · Open-source product build',
-    github: 'https://github.com/Shift-ai-tech-ORG/BioSense-App',
-    live: 'https://biosense-852391237627.europe-west2.run.app',
-    poc: 'https://shift-ai-tech-org.github.io/Neil_BIOSENSE/',
+      'From interactive POC to production — auth, blood-panel analysis, billing, and wearable sync in one continuous health intelligence product.',
+    reference: 'Shift AI Tech · Product build',
+    link: { href: 'https://bio-sense.ai/', label: 'bio-sense.ai' },
+    images: ['/case-studies/biosense.jpg'],
   },
   {
     id: 'screener',

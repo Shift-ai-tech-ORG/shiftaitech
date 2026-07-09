@@ -304,39 +304,50 @@ function App() {
           <div className="portfolio-grid">
             {portfolio.map((p, i) => (
               <motion.div key={p.id} id={`case-study-${p.id}`} {...stagger(i)}>
-                <Card className="portfolio-card">
-                  <div className="portfolio-card-top">
-                    <span className="portfolio-sector">{p.sector}</span>
-                    <p.icon size={22} strokeWidth={1.5} className="portfolio-icon" />
-                  </div>
-                  <p className="portfolio-category">{p.category}</p>
-                  <h3 className="portfolio-name">{p.partner}</h3>
-                  <p className="portfolio-desc">{p.description}</p>
-                  <div className="portfolio-quote">
-                    <p className="portfolio-quote-text">&ldquo;{p.quote}&rdquo;</p>
-                    <p className="portfolio-quote-ref">{p.reference}</p>
-                  </div>
-                  {(p.github || p.live || p.poc) && (
-                    <div className="portfolio-links">
-                      {p.live && (
-                        <a href={p.live} target="_blank" rel="noopener noreferrer" className="portfolio-link">
-                          Live app <ArrowRight size={14} />
-                        </a>
-                      )}
-                      {p.github && (
-                        <a href={p.github} target="_blank" rel="noopener noreferrer" className="portfolio-link">
-                          GitHub <ArrowRight size={14} />
-                        </a>
-                      )}
-                      {p.poc && (
-                        <a href={p.poc} target="_blank" rel="noopener noreferrer" className="portfolio-link portfolio-link--muted">
-                          POC demo <ArrowRight size={14} />
-                        </a>
+                <Card className={`portfolio-card${p.images ? ' portfolio-card--media' : ''}`}>
+                  {p.images && (
+                    <div className="portfolio-media">
+                      <div className="portfolio-media-main">
+                        <img src={p.images[0]} alt={`${p.partner} screenshot`} loading="lazy" />
+                        <div className="portfolio-media-overlay" />
+                        <span className="portfolio-sector portfolio-sector--onMedia">{p.sector}</span>
+                      </div>
+                      {p.images.length > 1 && (
+                        <div className="portfolio-media-thumbs">
+                          {p.images.slice(1).map((src) => (
+                            <img key={src} src={src} alt={`${p.partner} screenshot`} loading="lazy" />
+                          ))}
+                        </div>
                       )}
                     </div>
                   )}
-                  <div className="portfolio-tags">
-                    {p.tags.map((t) => <span key={t} className="tag">{t}</span>)}
+                  <div className="portfolio-body">
+                    <div className="portfolio-card-top">
+                      {!p.images && <span className="portfolio-sector">{p.sector}</span>}
+                      <p className="portfolio-category">{p.category}</p>
+                      <p.icon size={20} strokeWidth={1.5} className="portfolio-icon" />
+                    </div>
+                    <h3 className="portfolio-name">
+                      {p.partner}
+                      {p.link && (
+                        <a
+                          href={p.link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="portfolio-link"
+                        >
+                          {p.link.label} <ArrowRight size={13} />
+                        </a>
+                      )}
+                    </h3>
+                    <p className="portfolio-desc">{p.description}</p>
+                    <div className="portfolio-quote">
+                      <p className="portfolio-quote-text">&ldquo;{p.quote}&rdquo;</p>
+                      <p className="portfolio-quote-ref">{p.reference}</p>
+                    </div>
+                    <div className="portfolio-tags">
+                      {p.tags.map((t) => <span key={t} className="tag">{t}</span>)}
+                    </div>
                   </div>
                 </Card>
               </motion.div>

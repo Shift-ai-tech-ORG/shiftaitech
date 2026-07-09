@@ -575,29 +575,44 @@
 .case-study-category {
   display: flex;
   align-items: center;
-  min-height: 4.5rem;
-  padding: 1rem 1.125rem;
-  border-radius: 999px;
-  border: 1.5px solid rgba(74, 222, 128, 0.45);
-  background: rgba(74, 222, 128, 0.04);
-  color: var(--text-primary);
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 3.5rem;
+  padding: 0.875rem 1.125rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-secondary);
   font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.45;
   text-decoration: none;
-  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.case-study-category::after {
+  content: '→';
+  flex-shrink: 0;
+  color: var(--text-tertiary);
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .case-study-category:hover {
-  border-color: rgba(74, 222, 128, 0.85);
-  background: rgba(74, 222, 128, 0.08);
+  border-color: var(--purple-border);
+  background: var(--purple-muted);
+  color: var(--text-primary);
   transform: translateY(-1px);
+}
+
+.case-study-category:hover::after {
+  color: var(--purple-light);
+  transform: translateX(2px);
 }
 
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
+  gap: 1.5rem;
   margin-top: 3.5rem;
 }
 
@@ -612,14 +627,74 @@
 .portfolio-card {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   height: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.portfolio-card.ui-card--hover:hover {
+  border-color: var(--purple-border);
+  transform: translateY(-3px);
+}
+
+/* Media block (screenshots) */
+.portfolio-media {
+  border-bottom: 1px solid var(--border);
+}
+
+.portfolio-media-main {
+  position: relative;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+}
+
+.portfolio-media-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.5s ease;
+}
+
+.portfolio-card:hover .portfolio-media-main img {
+  transform: scale(1.03);
+}
+
+.portfolio-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 10, 12, 0.25) 0%, transparent 35%, transparent 70%, rgba(10, 10, 12, 0.45) 100%);
+  pointer-events: none;
+}
+
+.portfolio-media-thumbs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border-top: 1px solid var(--border);
+}
+
+.portfolio-media-thumbs img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.portfolio-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.875rem;
+  padding: 1.5rem 1.75rem 1.75rem;
 }
 
 .portfolio-card-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.75rem;
 }
 
 .portfolio-sector {
@@ -632,21 +707,38 @@
   border: 1px solid var(--purple-border);
   border-radius: 4px;
   background: var(--purple-muted);
+  white-space: nowrap;
+}
+
+.portfolio-sector--onMedia {
+  position: absolute;
+  top: 0.875rem;
+  left: 0.875rem;
+  background: rgba(10, 10, 12, 0.72);
+  backdrop-filter: blur(8px);
+  border-color: rgba(168, 85, 247, 0.35);
 }
 
 .portfolio-icon {
   color: var(--text-tertiary);
+  flex-shrink: 0;
 }
 
 .portfolio-name {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.375rem 0.875rem;
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
 
 .portfolio-category {
-  font-size: 0.75rem;
-  font-weight: 500;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--text-tertiary);
   line-height: 1.5;
 }
@@ -681,28 +773,19 @@
   color: var(--text-tertiary);
 }
 
-.portfolio-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1rem;
-}
-
 .portfolio-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.3rem;
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--purple-light);
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .portfolio-link:hover {
   color: #fff;
-}
-
-.portfolio-link--muted {
-  color: var(--text-tertiary);
 }
 
 .portfolio-tags {
@@ -710,6 +793,7 @@
   flex-wrap: wrap;
   gap: 0.375rem;
   margin-top: auto;
+  padding-top: 0.25rem;
 }
 
 /* ─── Financial Markets ────────────────────────── */
