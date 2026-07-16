@@ -1,13 +1,6 @@
-import { motion } from 'framer-motion'
 import { Container, SectionLabel, Button } from './components/ui'
+import { Reveal } from './components/motion'
 import './TeamPage.css'
-
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5 },
-}
 
 const teamProfiles = [
   {
@@ -53,13 +46,13 @@ export default function TeamPage() {
     <div className="subpage team-page">
       <section className="subpage-hero">
         <Container>
-          <motion.div {...fadeUp}>
+          <Reveal>
             <SectionLabel>Team</SectionLabel>
             <h1 className="subpage-title">Meet the People Behind Shift</h1>
             <p className="subpage-sub">
               This page is a ready-to-edit template. Add photos, bios, and links for each team member.
             </p>
-          </motion.div>
+          </Reveal>
         </Container>
       </section>
 
@@ -67,14 +60,7 @@ export default function TeamPage() {
         <Container>
           <div className="team-grid">
             {teamProfiles.map((member, i) => (
-              <motion.article
-                key={i}
-                className="team-card"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-              >
+              <Reveal key={i} as="article" className="team-card" delay={i * 0.07}>
                 <div className="team-card-header">
                   <div className="team-avatar">{initialsFor(member.name)}</div>
                   <div>
@@ -93,7 +79,7 @@ export default function TeamPage() {
                   <a href={`mailto:${member.email}`} className="team-link">Email</a>
                   <a href={member.linkedin} className="team-link">LinkedIn</a>
                 </div>
-              </motion.article>
+              </Reveal>
             ))}
           </div>
 

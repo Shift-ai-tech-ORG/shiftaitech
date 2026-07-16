@@ -9,16 +9,19 @@
 .team-card {
   background: var(--bg-surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  transition: border-color 0.25s ease;
+  transition: border-color var(--dur-ui) var(--ease-out), transform var(--dur-slow) var(--ease-out);
 }
 
-.team-card:hover {
-  border-color: var(--border-light);
+@media (hover: hover) and (pointer: fine) {
+  .team-card:hover {
+    border-color: var(--purple-border);
+    transform: translateY(-3px);
+  }
 }
 
 .team-card-header {
@@ -85,12 +88,14 @@
   color: var(--text-secondary);
   border-bottom: 1px solid var(--border);
   padding-bottom: 1px;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition: color var(--dur-ui) var(--ease-out), border-color var(--dur-ui) var(--ease-out);
 }
 
-.team-link:hover {
-  color: var(--purple-light);
-  border-color: var(--purple-border);
+@media (hover: hover) and (pointer: fine) {
+  .team-link:hover {
+    color: var(--purple-light);
+    border-color: var(--purple-border);
+  }
 }
 
 .team-cta {

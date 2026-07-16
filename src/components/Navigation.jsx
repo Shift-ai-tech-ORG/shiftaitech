@@ -94,7 +94,12 @@ export default function Navigation() {
             onClick={toggleTheme}
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            <span className="nav-theme-icon nav-theme-icon--sun" aria-hidden="true">
+              <Sun size={18} />
+            </span>
+            <span className="nav-theme-icon nav-theme-icon--moon" aria-hidden="true">
+              <Moon size={18} />
+            </span>
           </button>
           <a href={isHome ? '#contact' : '/#contact'} className="nav-cta">
             <span>Get in Touch</span>

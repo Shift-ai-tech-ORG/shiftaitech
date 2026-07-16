@@ -1,13 +1,6 @@
-import { motion } from 'framer-motion'
 import { Container, SectionLabel } from './components/ui'
+import { Reveal } from './components/motion'
 import './BlogPage.css'
-
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5 },
-}
 
 const DRAFT_POSTS = [
   {
@@ -44,7 +37,7 @@ export default function BlogPage() {
     <div className="subpage blog-page">
       <section className="subpage-hero">
         <Container>
-          <motion.div {...fadeUp}>
+          <Reveal>
             <SectionLabel>Shift Journal</SectionLabel>
             <h1 className="subpage-title">
               Insights from High-Performance <span className="text-accent">AI Delivery Teams</span>
@@ -52,7 +45,7 @@ export default function BlogPage() {
             <p className="subpage-sub">
               Internal draft board for upcoming blog content and release planning.
             </p>
-          </motion.div>
+          </Reveal>
         </Container>
       </section>
 
@@ -60,19 +53,12 @@ export default function BlogPage() {
         <Container>
           <div className="blog-grid">
             {DRAFT_POSTS.map((post, i) => (
-              <motion.article
-                key={post.id}
-                className="blog-card"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-              >
+              <Reveal key={post.id} as="article" className="blog-card" delay={i * 0.07}>
                 <p className="blog-card-meta">{post.author} &middot; {post.draftDate}</p>
                 <h2 className="blog-card-title">{post.title}</h2>
                 <p className="blog-card-excerpt">{post.excerpt}</p>
                 <p className="blog-card-body">{post.content}</p>
-              </motion.article>
+              </Reveal>
             ))}
           </div>
         </Container>

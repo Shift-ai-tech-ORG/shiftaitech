@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import {
   ArrowRight,
+  ArrowUpRight,
   Mail,
   MapPin,
   Zap,
@@ -26,6 +27,7 @@ import {
 } from 'lucide-react'
 import { Container, SectionLabel, SectionHeading, Button, Card } from './components/ui'
 import ContactForm from './components/ContactForm'
+import { EASE, Reveal, MediaReveal, CountUp } from './components/motion'
 import { keyMessages, caseStudyCategories, portfolio as portfolioData } from './data/projects'
 import './App.css'
 
@@ -43,17 +45,8 @@ const portfolio = portfolioData.map((p) => ({
   icon: portfolioIcons[p.iconKey],
 }))
 
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-60px' },
-  transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
-}
-
-const stagger = (i, base = 0.06) => ({
-  ...fadeUp,
-  transition: { ...fadeUp.transition, delay: i * base },
-})
+const featuredProjects = portfolio.filter((p) => p.featured)
+const compactProjects = portfolio.filter((p) => !p.featured)
 
 const IMG = {
   finance: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80',
@@ -191,7 +184,7 @@ function App() {
           <div className="hero-video-overlay" />
         </div>
         <Container>
-          <motion.div className="hero-inner" {...fadeUp}>
+          <Reveal className="hero-inner">
             <h1 className="hero-title">
               <span className="hero-line">Proven <span className="text-accent">Hyper Agile</span></span>
               <span className="hero-line">AI Solutions.</span>
@@ -209,8 +202,11 @@ function App() {
                 Read our story <ArrowRight size={15} />
               </Link>
             </div>
-          </motion.div>
+          </Reveal>
         </Container>
+        <div className="hero-scroll-cue" aria-hidden="true">
+          <span className="hero-scroll-cue-line" />
+        </div>
       </section>
 
       {/* Tech Ticker */}
@@ -225,9 +221,9 @@ function App() {
       {/* Differentiator */}
       <section className="differentiator">
         <Container>
-          <motion.div className="differentiator-inner" {...fadeUp}>
+          <Reveal className="differentiator-inner">
             <div className="differentiator-stat">
-              <span className="differentiator-number">20%</span>
+              <span className="differentiator-number"><CountUp to={20} suffix="%" /></span>
               <p className="differentiator-text">
                 of technology firms build AI products using AI tools. We are one of them.
               </p>
@@ -238,23 +234,23 @@ function App() {
                 <span key={p} className="differentiator-pill">{p}</span>
               ))}
             </div>
-          </motion.div>
+          </Reveal>
         </Container>
       </section>
 
       {/* Services — Featured layout with images */}
       <section id="solutions" className="section">
         <Container>
-          <motion.div {...fadeUp}>
+          <Reveal>
             <SectionLabel>Services</SectionLabel>
             <SectionHeading>What We Do</SectionHeading>
             <p className="section-intro">
               Four core capabilities, each refined through real-world delivery across regulated industries, startups, and enterprise.
             </p>
-          </motion.div>
+          </Reveal>
           <div className="services-featured">
             {services.map((s, i) => (
-              <motion.div key={i} className="service-featured-card" {...stagger(i, 0.1)}>
+              <Reveal key={i} className="service-featured-card" delay={i * 0.07}>
                 <div className="service-featured-img">
                   <img src={s.img} alt="" loading="lazy" />
                   <div className="service-featured-img-overlay" />
@@ -264,93 +260,112 @@ function App() {
                   <h3 className="service-featured-title">{s.title}</h3>
                   <p className="service-featured-desc">{s.description}</p>
                 </div>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </Container>
       </section>
 
-      {/* Portfolio */}
+      {/* Portfolio — Case studies */}
       <section id="projects" className="section section--dark">
         <Container>
-          <motion.div {...fadeUp}>
+          <Reveal>
             <SectionLabel>Proven Track Record</SectionLabel>
             <SectionHeading>Portfolio of Projects &amp; Partners</SectionHeading>
             <p className="section-intro">
               Sector agnostic. Proven solutions across compliance, learning &amp; development, health &amp; life science, SaaS, and financial markets.
             </p>
-          </motion.div>
+          </Reveal>
 
-          <motion.div className="key-messages" {...fadeUp}>
-            <p className="key-messages-label">Key messages</p>
+          <Reveal className="key-messages">
             <ul className="key-messages-list">
               {keyMessages.map((msg) => (
                 <li key={msg}>{msg}</li>
               ))}
             </ul>
-          </motion.div>
+          </Reveal>
 
-          <motion.div className="case-study-categories" {...fadeUp}>
-            <p className="case-study-categories-label">AI case study examples</p>
-            <div className="case-study-categories-grid">
+          <Reveal className="case-study-categories">
+            <p className="case-study-categories-label">Jump to a case study</p>
+            <div className="case-study-categories-strip">
               {caseStudyCategories.map((cat) => (
                 <a key={cat.id} href={`#case-study-${cat.id}`} className="case-study-category">
                   {cat.label}
                 </a>
               ))}
             </div>
-          </motion.div>
+          </Reveal>
 
-          <div className="portfolio-grid">
-            {portfolio.map((p, i) => (
-              <motion.div key={p.id} id={`case-study-${p.id}`} {...stagger(i)}>
-                <Card className={`portfolio-card${p.images ? ' portfolio-card--media' : ''}`}>
-                  {p.images && (
-                    <div className="portfolio-media">
-                      <div className="portfolio-media-main">
-                        <img src={p.images[0]} alt={`${p.partner} screenshot`} loading="lazy" />
-                        <div className="portfolio-media-overlay" />
-                        <span className="portfolio-sector portfolio-sector--onMedia">{p.sector}</span>
-                      </div>
-                      {p.images.length > 1 && (
-                        <div className="portfolio-media-thumbs">
-                          {p.images.slice(1).map((src) => (
-                            <img key={src} src={src} alt={`${p.partner} screenshot`} loading="lazy" />
-                          ))}
-                        </div>
-                      )}
+          {/* Featured showcase — large alternating media panels */}
+          <div className="showcase">
+            {featuredProjects.map((p, i) => (
+              <div
+                key={p.id}
+                id={`case-study-${p.id}`}
+                className={`showcase-item${i % 2 === 1 ? ' showcase-item--flip' : ''}`}
+              >
+                <MediaReveal className="showcase-media">
+                  <div className="showcase-media-main">
+                    <img src={p.images[0]} alt={`${p.partner} screenshot`} loading="lazy" />
+                  </div>
+                  {p.images.length > 1 && (
+                    <div className="showcase-media-thumbs">
+                      {p.images.slice(1).map((src) => (
+                        <img key={src} src={src} alt={`${p.partner} screenshot`} loading="lazy" />
+                      ))}
                     </div>
                   )}
-                  <div className="portfolio-body">
-                    <div className="portfolio-card-top">
-                      {!p.images && <span className="portfolio-sector">{p.sector}</span>}
-                      <p className="portfolio-category">{p.category}</p>
-                      <p.icon size={20} strokeWidth={1.5} className="portfolio-icon" />
-                    </div>
-                    <h3 className="portfolio-name">
-                      {p.partner}
-                      {p.link && (
-                        <a
-                          href={p.link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="portfolio-link"
-                        >
-                          {p.link.label} <ArrowRight size={13} />
-                        </a>
-                      )}
-                    </h3>
-                    <p className="portfolio-desc">{p.description}</p>
-                    <div className="portfolio-quote">
-                      <p className="portfolio-quote-text">&ldquo;{p.quote}&rdquo;</p>
-                      <p className="portfolio-quote-ref">{p.reference}</p>
-                    </div>
-                    <div className="portfolio-tags">
+                </MediaReveal>
+                <Reveal className="showcase-content" delay={0.12}>
+                  <span className="showcase-sector">{p.sector}</span>
+                  <h3 className="showcase-name">{p.partner}</h3>
+                  <p className="showcase-category">{p.category}</p>
+                  <p className="showcase-desc">{p.description}</p>
+                  <blockquote className="showcase-quote">
+                    <p className="showcase-quote-text">&ldquo;{p.quote}&rdquo;</p>
+                    <cite className="showcase-quote-ref">{p.reference}</cite>
+                  </blockquote>
+                  <div className="showcase-foot">
+                    <div className="showcase-tags">
                       {p.tags.map((t) => <span key={t} className="tag">{t}</span>)}
                     </div>
+                    {p.link && (
+                      <a
+                        href={p.link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="showcase-link"
+                      >
+                        {p.link.label} <ArrowUpRight size={14} />
+                      </a>
+                    )}
+                  </div>
+                </Reveal>
+              </div>
+            ))}
+          </div>
+
+          {/* Compact grid — remaining case studies */}
+          <div className="portfolio-grid">
+            {compactProjects.map((p, i) => (
+              <Reveal key={p.id} id={`case-study-${p.id}`} delay={i * 0.07}>
+                <Card className="portfolio-card">
+                  <div className="portfolio-card-top">
+                    <span className="portfolio-sector">{p.sector}</span>
+                    <p.icon size={20} strokeWidth={1.5} className="portfolio-icon" />
+                  </div>
+                  <h3 className="portfolio-name">{p.partner}</h3>
+                  <p className="portfolio-category">{p.category}</p>
+                  <p className="portfolio-desc">{p.description}</p>
+                  <div className="portfolio-quote">
+                    <p className="portfolio-quote-text">&ldquo;{p.quote}&rdquo;</p>
+                    <p className="portfolio-quote-ref">{p.reference}</p>
+                  </div>
+                  <div className="portfolio-tags">
+                    {p.tags.map((t) => <span key={t} className="tag">{t}</span>)}
                   </div>
                 </Card>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -363,28 +378,28 @@ function App() {
           <div className="finance-hero-overlay" />
         </div>
         <Container>
-          <motion.div className="finance-header" {...fadeUp}>
+          <Reveal className="finance-header">
             <SectionLabel>Core Speciality</SectionLabel>
             <SectionHeading>Built for Financial Markets</SectionHeading>
             <p className="section-intro section-intro--onDark">
               Financial markets are our home ground. We build AI systems that trade, analyse, predict, and report — with the rigour regulated markets demand and the speed that gives you edge.
             </p>
-          </motion.div>
+          </Reveal>
           <div className="finance-grid">
             {financeCapabilities.map((cap, i) => (
-              <motion.div key={i} className="finance-card" {...stagger(i)}>
+              <Reveal key={i} className="finance-card" delay={(i % 2) * 0.07}>
                 <div className="finance-card-icon">
                   <cap.icon size={20} strokeWidth={1.5} />
                 </div>
                 <h3 className="finance-card-title">{cap.title}</h3>
                 <p className="finance-card-desc">{cap.desc}</p>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
-          <motion.div className="finance-cta" {...fadeUp}>
+          <Reveal className="finance-cta">
             <Button href="#contact">Discuss a Markets Project</Button>
             <span className="finance-note">Equities · FX · Crypto · Derivatives · Fixed Income</span>
-          </motion.div>
+          </Reveal>
         </Container>
       </section>
 
@@ -392,21 +407,21 @@ function App() {
       <section className="section section--surface">
         <Container>
           <div className="usecase-header">
-            <motion.div {...fadeUp}>
+            <Reveal>
               <SectionLabel>What We Build</SectionLabel>
               <SectionHeading>If It Runs on AI, <span className="text-accent">We Build It</span></SectionHeading>
-            </motion.div>
-            <motion.div className="usecase-header-img" {...fadeUp}>
+            </Reveal>
+            <Reveal className="usecase-header-img" delay={0.1}>
               <img src={IMG.server} alt="" loading="lazy" />
-            </motion.div>
+            </Reveal>
           </div>
           <div className="usecase-grid">
             {useCases.map((u, i) => (
-              <motion.div key={i} className="usecase-card" {...stagger(i, 0.05)}>
+              <Reveal key={i} className="usecase-card" delay={(i % 3) * 0.06}>
                 <div className="usecase-icon"><u.icon size={20} strokeWidth={1.5} /></div>
                 <h3 className="usecase-title">{u.title}</h3>
                 <p className="usecase-desc">{u.desc}</p>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -417,10 +432,10 @@ function App() {
         <Container>
           <div className="stats-grid">
             {stats.map((s, i) => (
-              <motion.div key={i} className="stat-cell" {...stagger(i)}>
+              <Reveal key={i} className="stat-cell" delay={(i % 3) * 0.06}>
                 <p className="stat-value">{s.value}</p>
                 <p className="stat-label">{s.label}</p>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -429,23 +444,32 @@ function App() {
       {/* Process — Timeline */}
       <section id="work-with-us" className="section">
         <Container>
-          <motion.div {...fadeUp}>
+          <Reveal>
             <SectionLabel>How We Work</SectionLabel>
             <SectionHeading>From Idea to Live in Weeks</SectionHeading>
-          </motion.div>
+          </Reveal>
           <div className="process-timeline">
             {processSteps.map((p, i) => (
-              <motion.div key={i} className="process-step" {...stagger(i, 0.1)}>
+              <Reveal key={i} className="process-step" delay={i * 0.1}>
                 <div className="process-step-marker">
                   <span className="process-step-dot" />
-                  {i < processSteps.length - 1 && <span className="process-step-line" />}
+                  {i < processSteps.length - 1 && (
+                    <motion.span
+                      className="process-step-line"
+                      initial={{ scaleY: 0 }}
+                      whileInView={{ scaleY: 1 }}
+                      viewport={{ once: true, margin: '-60px' }}
+                      transition={{ duration: 0.7, ease: EASE, delay: i * 0.1 + 0.2 }}
+                      style={{ transformOrigin: 'top' }}
+                    />
+                  )}
                 </div>
                 <div className="process-step-content">
                   <span className="process-step-num">{p.n}</span>
                   <h3 className="process-step-title">{p.title}</h3>
                   <p className="process-step-desc">{p.desc}</p>
                 </div>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -458,7 +482,7 @@ function App() {
           <div className="cta-band-overlay" />
         </div>
         <Container>
-          <motion.div className="cta-band-inner" {...fadeUp}>
+          <Reveal className="cta-band-inner">
             <h2 className="cta-band-title">
               Ready to cut costs and <span className="text-accent">build smarter?</span>
             </h2>
@@ -466,7 +490,7 @@ function App() {
               One-off projects or ongoing retainers. No account managers. No nonsense.
             </p>
             <Button href="#contact">Get a Free Consultation</Button>
-          </motion.div>
+          </Reveal>
         </Container>
       </section>
 
@@ -474,16 +498,16 @@ function App() {
       <section id="local-business" className="section">
         <Container>
           <div className="localbiz-hero-row">
-            <motion.div className="localbiz-hero-text" {...fadeUp}>
+            <Reveal className="localbiz-hero-text">
               <SectionLabel>For UK Local Businesses</SectionLabel>
               <SectionHeading>Something on Your Website Is Costing You Customers.</SectionHeading>
               <p className="section-intro" style={{ marginBottom: 0 }}>
                 Most local businesses we work with — dentists, gyms, roofers, electricians, salons — are losing 2 to 5 enquiries a week without knowing it. Slow site, not showing up on Google, no way to book out of hours. We audit your digital presence for free and tell you exactly what&apos;s happening. Then we fix it.
               </p>
-            </motion.div>
-            <motion.div className="localbiz-hero-img" {...fadeUp}>
+            </Reveal>
+            <Reveal className="localbiz-hero-img" delay={0.1}>
               <img src={IMG.localShop} alt="" loading="lazy" />
-            </motion.div>
+            </Reveal>
           </div>
 
           <div className="localbiz-steps">
@@ -492,15 +516,15 @@ function App() {
               { n: '02', title: 'We fix what\'s broken', desc: 'Site too slow? We fix it. Not showing up on Google Maps? We sort your listing. No way for customers to book or enquire online? We build that. Every fix is priced upfront with no surprises.' },
               { n: '03', title: 'AI receptionist', desc: 'An AI that answers your phone, handles common questions, and books appointments — even at 11pm on a Sunday. You stop losing jobs to voicemail. Set up in a week, runs itself after that.' },
             ].map((step, i) => (
-              <motion.div key={i} className="localbiz-step" {...stagger(i, 0.08)}>
+              <Reveal key={i} className="localbiz-step" delay={i * 0.08}>
                 <span className="localbiz-step-num">{step.n}</span>
                 <h3 className="localbiz-step-title">{step.title}</h3>
                 <p className="localbiz-step-desc">{step.desc}</p>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
 
-          <motion.div className="localbiz-pricing" {...fadeUp}>
+          <Reveal className="localbiz-pricing">
             <p className="localbiz-pricing-label">What It Costs</p>
             <div className="localbiz-pricing-table">
               {localBizPricing.map((row, i) => (
@@ -510,22 +534,22 @@ function App() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </Reveal>
 
-          <motion.div className="localbiz-cta" {...fadeUp}>
+          <Reveal className="localbiz-cta">
             <Button href="#contact">Get Your Free Audit</Button>
             <span className="localbiz-note">No commitment. 48-hour turnaround. Plain English results.</span>
-          </motion.div>
+          </Reveal>
         </Container>
       </section>
 
       {/* Why Us */}
       <section className="section section--surface">
         <Container>
-          <motion.div {...fadeUp}>
+          <Reveal>
             <SectionLabel>Why Shift AI Tech</SectionLabel>
             <SectionHeading>This Is Why <span className="text-accent">We&apos;re Different</span></SectionHeading>
-          </motion.div>
+          </Reveal>
           <div className="why-grid">
             {[
               { title: 'We build AI using AI', desc: 'Only 20% of technology firms build AI products using AI tools. We\'re in that 20%. It means we move faster, iterate quicker, and pass the cost savings directly to you.' },
@@ -533,11 +557,11 @@ function App() {
               { title: 'We save you time and money', desc: 'Friction-free development spend. Everything is scoped, priced, and delivered with zero waste. You pay for results, not hours.' },
               { title: 'Sector agnostic', desc: 'Proven solutions across compliance, learning & development, health & fitness, SaaS, and financial markets. If there\'s data and a problem, we can build the AI.' },
             ].map((w, i) => (
-              <motion.div key={i} className="why-card" {...stagger(i, 0.08)}>
+              <Reveal key={i} className="why-card" delay={(i % 2) * 0.08}>
                 <span className="why-num">0{i + 1}</span>
                 <h3 className="why-title">{w.title}</h3>
                 <p className="why-desc">{w.desc}</p>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -546,13 +570,13 @@ function App() {
       {/* Scenarios */}
       <section className="section section--dark">
         <Container>
-          <motion.div {...fadeUp}>
+          <Reveal>
             <SectionLabel>Real Problems We Solve</SectionLabel>
             <SectionHeading>What This Looks Like in Practice</SectionHeading>
-          </motion.div>
+          </Reveal>
           <div className="scenarios-grid">
             {scenarios.map((s, i) => (
-              <motion.div key={i} {...stagger(i, 0.08)}>
+              <Reveal key={i} delay={(i % 2) * 0.08}>
                 <Card className="scenario-card">
                   <span className="scenario-type">{s.type}</span>
                   <div className="scenario-block">
@@ -565,7 +589,7 @@ function App() {
                   </div>
                   <p className="scenario-outcome">{s.outcome}</p>
                 </Card>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -582,13 +606,13 @@ function App() {
           <div className="contact-bg-overlay" />
         </div>
         <Container>
-          <motion.div {...fadeUp}>
+          <Reveal>
             <SectionLabel>Contact</SectionLabel>
             <SectionHeading>Let&apos;s Build Something</SectionHeading>
             <p className="section-intro">Tell us about your project and let&apos;s get to work.</p>
-          </motion.div>
+          </Reveal>
           <div className="contact-grid">
-            <motion.div className="contact-info" {...fadeUp}>
+            <Reveal className="contact-info">
               <div className="contact-item">
                 <Mail size={18} />
                 <a href="mailto:jack@shiftaitech.com">jack@shiftaitech.com</a>
@@ -601,10 +625,10 @@ function App() {
                 <Zap size={14} />
                 We respond within 24 hours
               </div>
-            </motion.div>
-            <motion.div className="contact-form-wrap" {...fadeUp}>
+            </Reveal>
+            <Reveal className="contact-form-wrap" delay={0.1}>
               <ContactForm />
-            </motion.div>
+            </Reveal>
           </div>
         </Container>
       </section>

@@ -1,14 +1,8 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { ArrowUpRight, ArrowRight } from 'lucide-react'
 import { Container, SectionLabel, Button } from './components/ui'
+import { Reveal } from './components/motion'
 import './OurStoryPage.css'
-
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5 },
-}
 
 const researchPapers = [
   {
@@ -37,19 +31,19 @@ export default function OurStoryPage() {
     <div className="subpage our-story-page">
       <section className="subpage-hero">
         <Container>
-          <motion.div {...fadeUp}>
+          <Reveal>
             <SectionLabel>Our Story</SectionLabel>
             <h1 className="subpage-title">
               Why <span className="text-accent">Shift AI</span> Exists
             </h1>
-          </motion.div>
+          </Reveal>
         </Container>
       </section>
 
       <section className="section">
         <Container narrow>
-          <motion.div className="story-prose" {...fadeUp}>
-            <p>
+          <Reveal className="story-prose">
+            <p className="story-lead">
               In 2024, the founding partners of Shift AI commissioned the development of advanced neural network models
               designed to predict Bitcoin price movements.
             </p>
@@ -93,45 +87,52 @@ export default function OurStoryPage() {
               The industry is only beginning to recognise the scale of this shift. At Shift AI, we experienced it
               first-hand — long before it became a widely discussed theme.
             </p>
-          </motion.div>
+          </Reveal>
         </Container>
       </section>
 
       <section className="section section--surface">
         <Container>
-          <motion.div {...fadeUp}>
+          <Reveal>
+            <SectionLabel>Research</SectionLabel>
             <h2 className="ui-section-heading">Explore the Research</h2>
-          </motion.div>
-          <div className="research-grid">
-            {researchPapers.map((paper) => {
+          </Reveal>
+          <div className="research-list">
+            {researchPapers.map((paper, i) => {
               const inner = (
                 <>
-                  <h3 className="research-card-title">{paper.title}</h3>
-                  <p className="research-card-summary">{paper.summary}</p>
-                  <span className="research-card-link">
-                    {paper.external ? 'Read report \u2192' : 'Read article \u2192'}
+                  <div className="research-row-body">
+                    <h3 className="research-row-title">{paper.title}</h3>
+                    <p className="research-row-summary">{paper.summary}</p>
+                  </div>
+                  <span className="research-row-action">
+                    {paper.external ? 'Read report' : 'Read article'}
+                    {paper.external ? <ArrowUpRight size={15} /> : <ArrowRight size={15} />}
                   </span>
                 </>
               )
 
               if (paper.external) {
                 return (
-                  <a
-                    key={paper.id}
-                    href={paper.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="research-card"
-                  >
-                    {inner}
-                  </a>
+                  <Reveal key={paper.id} delay={i * 0.06}>
+                    <a
+                      href={paper.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="research-row"
+                    >
+                      {inner}
+                    </a>
+                  </Reveal>
                 )
               }
 
               return (
-                <Link key={paper.id} to={`/research/${paper.id}`} className="research-card">
-                  {inner}
-                </Link>
+                <Reveal key={paper.id} delay={i * 0.06}>
+                  <Link to={`/research/${paper.id}`} className="research-row">
+                    {inner}
+                  </Link>
+                </Reveal>
               )
             })}
           </div>
@@ -140,7 +141,7 @@ export default function OurStoryPage() {
 
       <section className="section">
         <Container narrow>
-          <motion.div className="story-close" {...fadeUp}>
+          <Reveal className="story-close">
             <p>At Shift AI, we didn&apos;t discover this transformation in theory.</p>
             <p className="story-emphasis">We lived it.</p>
             <p>
@@ -150,7 +151,7 @@ export default function OurStoryPage() {
             <div style={{ marginTop: '2.5rem' }}>
               <Button href="/#contact">Start a Project</Button>
             </div>
-          </motion.div>
+          </Reveal>
         </Container>
       </section>
     </div>

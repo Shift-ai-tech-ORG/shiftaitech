@@ -1,13 +1,6 @@
-import { motion } from 'framer-motion'
 import { Container, SectionLabel } from './components/ui'
+import { Reveal } from './components/motion'
 import './PartnersPage.css'
-
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5 },
-}
 
 const teamMembers = [
   {
@@ -35,13 +28,13 @@ export default function PartnersPage() {
     <div className="subpage partners-page">
       <section className="subpage-hero">
         <Container>
-          <motion.div {...fadeUp}>
+          <Reveal>
             <SectionLabel>Partners</SectionLabel>
             <h1 className="subpage-title">Meet the Partners Behind Shift</h1>
             <p className="subpage-sub">
               The people driving Shift AI Tech forward. Strategy, delivery, and growth.
             </p>
-          </motion.div>
+          </Reveal>
         </Container>
       </section>
 
@@ -49,13 +42,11 @@ export default function PartnersPage() {
         <Container>
           <div className="partners-grid">
             {teamMembers.map((member, i) => (
-              <motion.article
+              <Reveal
                 key={member.name + member.role}
+                as="article"
                 className="partner-card"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
+                delay={i * 0.07}
               >
                 {member.image && (
                   <div className="partner-img-wrap">
@@ -65,7 +56,7 @@ export default function PartnersPage() {
                 <p className="partner-role">{member.role}</p>
                 <h2 className="partner-name">{member.name}</h2>
                 <p className="partner-summary">{member.summary}</p>
-              </motion.article>
+              </Reveal>
             ))}
           </div>
         </Container>

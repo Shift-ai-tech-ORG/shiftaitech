@@ -22,6 +22,14 @@
   --max-width: 1200px;
   --nav-height: 72px;
 
+  /* Motion system — strong custom curves (built-in CSS easings are too weak) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-press: 160ms;
+  --dur-ui: 200ms;
+  --dur-slow: 280ms;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -65,6 +73,8 @@ body {
   color: var(--text-secondary);
   line-height: 1.7;
   font-size: 16px;
+  /* Soften the dark <-> light theme switch — no abrupt brightness jump */
+  transition: background-color 300ms var(--ease-out), color 300ms var(--ease-out);
 }
 
 #root {
@@ -98,4 +108,22 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.15;
   letter-spacing: -0.025em;
   font-weight: 600;
+  text-wrap: balance;
+}
+
+/* Tabular figures so stats and counters never shift as digits change */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Reduced motion: gentle cross-fades instead of movement, no vestibular motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.15s !important;
+    scroll-behavior: auto !important;
+  }
 }

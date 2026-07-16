@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
 import { Container } from './components/ui'
+import { Reveal } from './components/motion'
 import './ResearchPaperPage.css'
 
 const paperDetails = {
@@ -45,12 +45,6 @@ const keyInsights = [
   { stat: '27% vs 9%', detail: 'revenue-per-employee growth in AI-exposed industries versus others (PwC).' },
 ]
 
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 },
-}
-
 export default function ResearchPaperPage() {
   const { paperId } = useParams()
   const navigate = useNavigate()
@@ -63,7 +57,7 @@ export default function ResearchPaperPage() {
     <div className="subpage research-page">
       <section className="subpage-hero subpage-hero--compact">
         <Container narrow>
-          <motion.div {...fadeUp}>
+          <Reveal>
             <button
               type="button"
               className="research-back"
@@ -74,14 +68,14 @@ export default function ResearchPaperPage() {
             >
               <ArrowLeft size={16} /> Back
             </button>
-          </motion.div>
+          </Reveal>
         </Container>
       </section>
 
       {paperId !== 'research-paper-3' ? (
         <section className="section">
           <Container narrow>
-            <motion.div {...fadeUp}>
+            <Reveal>
               <p className="ui-section-label">Research</p>
               <h1 className="subpage-title">{paper.title}</h1>
               <p className="subpage-sub">{paper.summary}</p>
@@ -91,19 +85,19 @@ export default function ResearchPaperPage() {
                   Add your full research summary, key findings, data references, and source links here when ready.
                 </p>
               </div>
-            </motion.div>
+            </Reveal>
           </Container>
         </section>
       ) : (
         <article className="research-article">
           <section className="whitepaper-cover">
             <Container narrow>
-              <motion.div {...fadeUp}>
+              <Reveal>
                 <p className="whitepaper-label">Shift AI Research</p>
                 <h1 className="whitepaper-title">The AI Value Shift</h1>
                 <p className="whitepaper-subtitle">How Artificial Intelligence is Driving Measurable Business Impact</p>
                 <p className="whitepaper-author">Author: Shift AI Research</p>
-              </motion.div>
+              </Reveal>
             </Container>
           </section>
 

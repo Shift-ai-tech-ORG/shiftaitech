@@ -28,6 +28,7 @@ export const portfolio = [
       'What used to take our compliance team three days now takes under two hours. The accuracy and audit trail are exceptional.',
     reference: 'Compliance Director, Mid-Sized Accountancy Practice',
     images: ['/case-studies/braid-aml.jpg'],
+    featured: true,
   },
   {
     id: 'lnd',
@@ -46,6 +47,7 @@ export const portfolio = [
       '/case-studies/deep-space-3.jpg',
       '/case-studies/deep-space-2.jpg',
     ],
+    featured: true,
   },
   {
     id: 'biosense',
@@ -61,6 +63,7 @@ export const portfolio = [
     reference: 'Shift AI Tech · Product build',
     link: { href: 'https://bio-sense.ai/', label: 'bio-sense.ai' },
     images: ['/case-studies/biosense.jpg'],
+    featured: true,
   },
   {
     id: 'screener',
