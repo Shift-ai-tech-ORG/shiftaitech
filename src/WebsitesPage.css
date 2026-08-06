@@ -1,0 +1,424 @@
+/* ─── Websites offer page ───────────────────────── */
+
+.websites-hero {
+  padding: calc(var(--nav-height) + 5rem) 0 4rem;
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(168, 85, 247, 0.1) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 20%, rgba(124, 58, 237, 0.06) 0%, transparent 45%),
+    var(--bg-primary);
+}
+
+.websites-hero-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.websites-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.websites-hero-actions .ui-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.websites-ref-banner {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 1rem 1.15rem;
+  border-radius: 10px;
+  border: 1px solid var(--purple-border);
+  background: var(--purple-muted);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.websites-ref-banner svg {
+  color: var(--purple);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.websites-ref-banner strong {
+  display: block;
+  color: var(--text-primary);
+  margin-bottom: 0.15rem;
+}
+
+.websites-price-card {
+  background:
+    linear-gradient(165deg, rgba(168, 85, 247, 0.12), transparent 55%),
+    var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  position: sticky;
+  top: calc(var(--nav-height) + 1.5rem);
+}
+
+.websites-price-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 0.75rem;
+}
+
+.websites-price-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.65rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.websites-price-or {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+}
+
+.websites-price-usd {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.websites-price-note {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.websites-include-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.websites-include-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.35rem 1.25rem;
+}
+
+.websites-check {
+  color: var(--purple);
+  margin-bottom: 0.75rem;
+}
+
+.websites-include-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+}
+
+.websites-include-card p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.websites-price-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-surface);
+}
+
+.websites-price-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+
+.websites-price-table th,
+.websites-price-table td {
+  padding: 1.15rem 1.25rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.websites-price-table th {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  font-weight: 600;
+  background: var(--bg-elevated);
+}
+
+.websites-price-table td {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--text-primary);
+}
+
+.websites-price-table td:first-child {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.9375rem;
+}
+
+.websites-price-table td:first-child strong {
+  display: block;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.websites-price-table td:first-child span {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+
+.websites-price-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.websites-extras {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.websites-extra-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 1.35rem;
+  background: var(--bg-surface);
+}
+
+.websites-extra-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.websites-extra-card h3 {
+  font-size: 1rem;
+}
+
+.websites-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--purple);
+  border: 1px solid var(--purple-border);
+  background: var(--purple-muted);
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+}
+
+.websites-extra-card p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.websites-cases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+}
+
+.websites-case {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.websites-case:hover {
+  border-color: var(--purple-border);
+  transform: translateY(-2px);
+}
+
+.websites-case-sector {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 0.35rem;
+}
+
+.websites-case h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+}
+
+.websites-case-url {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+.websites-case svg {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.websites-steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.websites-steps li {
+  display: flex;
+  gap: 0.85rem;
+  padding: 1.15rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-surface);
+}
+
+.websites-steps span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--purple);
+  font-size: 0.95rem;
+}
+
+.websites-steps strong {
+  display: block;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.websites-steps p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.websites-share-box {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem 1.6rem;
+  border-radius: 14px;
+  border: 1px solid var(--purple-border);
+  background: var(--purple-muted);
+}
+
+.websites-share-box svg {
+  color: var(--purple);
+  flex-shrink: 0;
+}
+
+.websites-share-box h2 {
+  font-size: 1.15rem;
+  margin-bottom: 0.25rem;
+}
+
+.websites-share-box p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.65rem;
+}
+
+.websites-share-box code {
+  display: inline-block;
+  font-size: 0.8125rem;
+  padding: 0.4rem 0.65rem;
+  border-radius: 6px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  word-break: break-all;
+}
+
+.websites-share-box .ui-btn {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.websites-print-cta {
+  margin-top: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+}
+
+.websites-cta .contact-grid {
+  margin-top: 0;
+}
+
+.websites-cta .section-intro {
+  margin-bottom: 1.5rem;
+}
+
+.websites-cta .contact-form-wrap {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.75rem;
+}
+
+@media (max-width: 960px) {
+  .websites-hero-grid,
+  .websites-include-grid,
+  .websites-cases,
+  .websites-steps,
+  .websites-extras {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .websites-price-card {
+    position: static;
+  }
+}
+
+@media (max-width: 700px) {
+  .websites-hero-grid,
+  .websites-include-grid,
+  .websites-cases,
+  .websites-steps,
+  .websites-extras {
+    grid-template-columns: 1fr;
+  }
+
+  .websites-share-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .websites-share-box .ui-btn {
+    margin-left: 0;
+  }
+}

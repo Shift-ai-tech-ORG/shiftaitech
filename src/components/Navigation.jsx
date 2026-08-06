@@ -34,6 +34,7 @@ export default function Navigation() {
   const navLinks = [
     { label: 'Projects', href: '/#projects', type: 'hash' },
     { label: 'Services', href: '/#solutions', type: 'hash' },
+    { label: 'Websites', href: '/websites', type: 'route' },
     { label: 'Partners', href: '/partners', type: 'route' },
     { label: 'Process', href: '/#work-with-us', type: 'hash' },
     { label: 'Our Story', href: '/our-story', type: 'route' },

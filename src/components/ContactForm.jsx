@@ -1,12 +1,44 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { FORMS_ENDPOINT } from '../config/site'
+import { getActiveReferral } from '../lib/referral'
 
-export default function ContactForm() {
-  const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' })
+export default function ContactForm({ referralCode, defaultMessage = '', source } = {}) {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    message: defaultMessage,
+  })
+  const [activeReferral, setActiveReferral] = useState(referralCode || '')
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    const fromProp = (referralCode || '').trim().toUpperCase()
+    if (fromProp) {
+      setActiveReferral(fromProp)
+      return
+    }
+    const stored = getActiveReferral()
+    if (stored?.code) setActiveReferral(stored.code)
+  }, [referralCode])
+
+  useEffect(() => {
+    if (!defaultMessage) return
+    setFormData((prev) => {
+      const isEmpty = !prev.message.trim()
+      const isStaleDefault =
+        prev.message === "I'm interested in the website + hosting package." ||
+        prev.message.startsWith("I'm interested in the website + hosting package.")
+      if (isEmpty || isStaleDefault) {
+        return { ...prev, message: defaultMessage }
+      }
+      return prev
+    })
+  }, [defaultMessage])
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -17,18 +49,25 @@ export default function ContactForm() {
     setLoading(true)
     setError('')
     try {
-      const formspreeId = import.meta.env.VITE_FORMSPREE_ID?.trim()
-      if (!formspreeId) throw new Error('FORMSPREE_NOT_CONFIGURED')
+      const endpoint = FORMS_ENDPOINT.replace(/\/$/, '')
+      if (endpoint.includes('PLACEHOLDER')) {
+        throw new Error('FORMS_NOT_CONFIGURED')
+      }
 
-      const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
+      const res = await fetch(`${endpoint}/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          company: formData.company,
-          message: formData.message,
-          _subject: `New Shift AI enquiry from ${formData.name}`,
+          type: 'enquiry',
+          fields: {
+            name: formData.name,
+            email: formData.email,
+            company: formData.company,
+            business: formData.company,
+            message: formData.message,
+            ...(source ? { source } : {}),
+            referralCode: activeReferral || undefined,
+          },
         }),
       })
       if (res.ok) {
@@ -37,13 +76,13 @@ export default function ContactForm() {
         let msg = 'Something went wrong. Please email us directly at jack@shiftaitech.com.'
         try {
           const payload = await res.json()
-          if (payload?.errors?.[0]?.message) msg = payload.errors[0].message
+          if (payload?.error) msg = payload.error
         } catch { /* keep default */ }
         setError(msg)
       }
     } catch (err) {
-      if (err instanceof Error && err.message === 'FORMSPREE_NOT_CONFIGURED') {
-        setError('Contact form is not configured yet. Please add VITE_FORMSPREE_ID in .env.local.')
+      if (err instanceof Error && err.message === 'FORMS_NOT_CONFIGURED') {
+        setError('Contact form is not configured yet. Run shift-infra/setup-aws.sh first.')
       } else {
         setError('Network error. Please email us directly at jack@shiftaitech.com.')
       }
@@ -63,11 +102,16 @@ export default function ContactForm() {
         <CheckCircle2 size={40} />
         <h3>Message received</h3>
         <p>We&apos;ll respond within 24 hours.</p>
+        {activeReferral && (
+          <p style={{ marginTop: '0.5rem', fontSize: '0.875rem' }}>
+            Logged against referral <strong>{activeReferral}</strong>
+          </p>
+        )}
         <button
           className="contact-form-reset"
           onClick={() => {
             setSubmitted(false)
-            setFormData({ name: '', email: '', company: '', message: '' })
+            setFormData({ name: '', email: '', company: '', message: defaultMessage })
           }}
         >
           Send another message
@@ -115,6 +159,18 @@ export default function ContactForm() {
           placeholder="Your company"
         />
       </div>
+      {activeReferral && (
+        <div className="contact-form-group">
+          <label htmlFor="cf-referral">Referral code</label>
+          <input
+            id="cf-referral"
+            type="text"
+            name="referralCode"
+            value={activeReferral}
+            readOnly
+          />
+        </div>
+      )}
       <div className="contact-form-group">
         <label htmlFor="cf-message">Project details</label>
         <textarea

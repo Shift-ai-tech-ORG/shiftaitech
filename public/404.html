@@ -7,7 +7,7 @@
       (function () {
         var l = window.location
         var redirect = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-          '/?p=' + encodeURIComponent(l.pathname) + l.hash
+          '/?p=' + encodeURIComponent(l.pathname + l.search) + l.hash
         l.replace(redirect)
       })()
     </script>

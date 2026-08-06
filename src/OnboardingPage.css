@@ -1,0 +1,176 @@
+.onboarding-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.onboarding-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.onboarding-logo {
+  height: 36px;
+  width: auto;
+}
+
+.onboarding-badge {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.onboarding-main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.onboarding-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.onboarding-sub {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.onboarding-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.onboarding-success {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.onboarding-success h1 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.onboarding-progress {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-bottom: 0.5rem;
+}
+
+.onboarding-progress-bar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.onboarding-progress-bar div {
+  height: 100%;
+  background: linear-gradient(90deg, var(--purple-dark), var(--purple));
+  transition: width 0.3s ease;
+}
+
+.onboarding-section-sub {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+.onboarding-field {
+  margin-bottom: 1.25rem;
+}
+
+.onboarding-field label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.onboarding-field input[type='text'],
+.onboarding-field input[type='email'],
+.onboarding-field textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9375rem;
+}
+
+.onboarding-field textarea {
+  resize: vertical;
+}
+
+.onboarding-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.onboarding-option {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.onboarding-nav {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.onboarding-back,
+.onboarding-next {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.onboarding-back {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.onboarding-back:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.onboarding-next {
+  background: var(--purple);
+  color: #fff;
+}
+
+.onboarding-next:hover:not(:disabled) {
+  background: var(--purple-dark);
+}
+
+.onboarding-error {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+}

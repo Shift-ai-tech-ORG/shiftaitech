@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Shift AI Tech — Website Build &amp; Host Flyer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #111114;
+    --muted: #52525b;
+    --line: #e4e4ea;
+    --purple: #7c3aed;
+    --purple-soft: #f3e8ff;
+    --purple-deep: #5b21b6;
+    --display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @page { size: A4; margin: 0; }
+  html, body { background: #e8e8ee; }
+  body {
+    font-family: var(--body);
+    color: var(--muted);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 14px 20px;
+    background: #111114; color: #f0f0f3;
+    font-family: var(--display);
+  }
+  .toolbar p { font-size: 13px; opacity: 0.85; }
+  .toolbar .actions { display: flex; gap: 8px; }
+  .toolbar button, .toolbar a {
+    appearance: none; border: 0; cursor: pointer; text-decoration: none;
+    font: inherit; font-size: 13px; font-weight: 700;
+    padding: 10px 14px; border-radius: 8px;
+  }
+  .toolbar .primary { background: #a855f7; color: #fff; }
+  .toolbar .ghost { background: transparent; color: #f0f0f3; border: 1px solid #3a3a45; }
+
+  .sheet {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 18px auto;
+    background: var(--bg);
+    color: var(--muted);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.12);
+    padding: 12mm 12mm 10mm;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .sheet::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(700px 280px at 100% -5%, rgba(124,58,237,0.10), transparent 60%),
+      radial-gradient(520px 240px at -5% 105%, rgba(168,85,247,0.08), transparent 55%);
+    pointer-events: none;
+  }
+  .content { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; min-height: 275mm; }
+
+  header { display: flex; justify-content: space-between; align-items: center; }
+  .brand {
+    font-family: var(--display); font-weight: 800; font-size: 22px; color: var(--ink);
+    letter-spacing: -0.04em;
+  }
+  .brand span { color: var(--purple); }
+  .url { font-family: var(--display); font-weight: 600; font-size: 11px; color: var(--purple); }
+
+  .hero { margin-top: 10mm; }
+  .hero h1 {
+    font-family: var(--display); font-weight: 800; color: var(--ink);
+    font-size: 34px; line-height: 1.05; letter-spacing: -0.035em;
+  }
+  .hero .lede {
+    margin-top: 3.5mm; font-size: 11.5px; line-height: 1.55; max-width: 150mm;
+  }
+  .price-row {
+    margin-top: 5mm;
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .price-chip {
+    font-family: var(--display); font-weight: 800; color: #fff;
+    background: linear-gradient(110deg, var(--purple), var(--purple-deep));
+    padding: 7px 12px; border-radius: 999px; font-size: 13px;
+  }
+  .price-chip.soft {
+    background: var(--purple-soft); color: var(--purple-deep);
+  }
+
+  .ref-banner {
+    display: none;
+    margin-top: 4mm;
+    border: 1px solid rgba(124,58,237,0.28);
+    background: var(--purple-soft);
+    color: var(--purple-deep);
+    border-radius: 8px;
+    padding: 7px 11px;
+    font-size: 10.5px; font-weight: 600;
+  }
+  .ref-banner.show { display: block; }
+
+  .rule { height: 1px; background: var(--line); margin: 5.5mm 0 5mm; }
+
+  .sec {
+    font-family: var(--display); font-size: 9px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--purple);
+    margin-bottom: 2.5mm;
+  }
+
+  .cols { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 6mm; }
+  .include {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2.2mm 4mm;
+  }
+  .include li {
+    list-style: none; font-size: 10px; line-height: 1.4;
+    padding-left: 3.2mm; position: relative;
+  }
+  .include li::before {
+    content: ''; position: absolute; left: 0; top: 1.4mm;
+    width: 2mm; height: 2mm; border-radius: 1px;
+    background: var(--purple);
+  }
+  .include strong { display: block; color: var(--ink); font-weight: 600; font-size: 10.5px; }
+
+  .matrix {
+    border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+  }
+  .matrix table { width: 100%; border-collapse: collapse; }
+  .matrix th, .matrix td {
+    padding: 2.4mm 2.6mm; text-align: left; border-bottom: 1px solid var(--line);
+    font-size: 9.5px;
+  }
+  .matrix th {
+    background: #f7f5ff; color: var(--purple-deep);
+    font-family: var(--display); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .matrix td { color: var(--ink); font-weight: 700; font-family: var(--display); font-size: 11px; }
+  .matrix td:first-child { font-family: var(--body); font-weight: 500; color: var(--muted); font-size: 9.5px; }
+  .matrix tr:last-child td { border-bottom: 0; }
+
+  .extras {
+    margin-top: 3.5mm;
+    display: grid; gap: 2mm;
+  }
+  .extra {
+    border: 1px dashed rgba(124,58,237,0.35);
+    background: #faf8ff;
+    border-radius: 8px;
+    padding: 2.4mm 3mm;
+    font-size: 9.5px; line-height: 1.45;
+  }
+  .extra strong { color: var(--ink); }
+  .badge {
+    display: inline-block; margin-left: 1.5mm;
+    font-size: 7.5px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--purple);
+    border: 1px solid rgba(124,58,237,0.3); border-radius: 999px;
+    padding: 1px 5px; vertical-align: middle;
+  }
+
+  .cases {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2mm;
+  }
+  .case {
+    border: 1px solid var(--line); border-radius: 8px; padding: 2.4mm 2.8mm;
+    background: #fafafa;
+  }
+  .case .sector {
+    font-size: 7.5px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--purple); margin-bottom: 1mm;
+  }
+  .case .name {
+    font-family: var(--display); font-weight: 700; color: var(--ink);
+    font-size: 11px; margin-bottom: 0.6mm;
+  }
+  .case .link { font-size: 8.5px; color: var(--muted); word-break: break-all; }
+
+  .process {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5mm;
+  }
+  .step {
+    border: 1px solid var(--line); border-radius: 8px; padding: 2.4mm 2.6mm;
+  }
+  .step .n {
+    font-family: var(--display); font-weight: 800; color: var(--purple); font-size: 11px;
+  }
+  .step .t {
+    font-family: var(--display); font-weight: 700; color: var(--ink);
+    font-size: 10.5px; margin-top: 1mm;
+  }
+  .step .d { font-size: 9px; line-height: 1.4; margin-top: 0.8mm; }
+
+  footer {
+    margin-top: auto;
+    padding-top: 4mm;
+  }
+  .cta {
+    display: flex; align-items: center; justify-content: space-between; gap: 8mm;
+    background: #111114; color: #f0f0f3;
+    border-radius: 12px; padding: 4mm 5mm;
+  }
+  .cta h2 {
+    font-family: var(--display); font-weight: 800; font-size: 15px; color: #fff;
+    letter-spacing: -0.02em;
+  }
+  .cta h2 span { color: #c084fc; }
+  .cta p { font-size: 9.5px; color: #b7b7c2; margin-top: 1.2mm; line-height: 1.45; }
+  .cta .meta { font-size: 10px; color: #c084fc; margin-top: 2mm; font-weight: 600; }
+  .qr-wrap { text-align: center; flex-shrink: 0; }
+  .qr-wrap img {
+    width: 22mm; height: 22mm; background: #fff; border-radius: 6px; padding: 1.5mm;
+    display: block;
+  }
+  .qr-wrap span {
+    display: block; margin-top: 1.2mm; font-size: 8px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #b7b7c2;
+  }
+
+  body.auto-print .toolbar { display: none !important; }
+  body.auto-print { background: #fff; }
+  body.auto-print .sheet { margin: 0; box-shadow: none; }
+
+  @media print {
+    html, body { background: #fff; }
+    .toolbar { display: none !important; }
+    .sheet {
+      margin: 0; box-shadow: none; width: 210mm; min-height: 297mm;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar no-print">
+    <p>Shift AI Tech flyer — print dialog should open automatically. If not, use the button.</p>
+    <div class="actions">
+      <a class="ghost" href="/websites">Back to page</a>
+      <button class="primary" type="button" onclick="window.print()">Export / Print PDF</button>
+    </div>
+  </div>
+
+  <div class="sheet">
+    <div class="content">
+      <header>
+        <div class="brand">shift<span>.</span></div>
+        <div class="url">shiftaitech.com/websites</div>
+      </header>
+
+      <div class="hero">
+        <h1>Websites That<br />Drive Revenue.</h1>
+        <p class="lede">
+          We design, build, and launch websites that get found on Google and turn visitors into customers.
+          Fixed package pricing worldwide — build and hosting included.
+        </p>
+        <div class="price-row">
+          <span class="price-chip">GBP £500</span>
+          <span class="price-chip soft">AED 2,500</span>
+          <span class="price-chip soft">USD $650</span>
+        </div>
+        <div id="refBanner" class="ref-banner">Partner referral code: <span id="refCode"></span></div>
+      </div>
+
+      <div class="rule"></div>
+
+      <div class="cols">
+        <div>
+          <div class="sec">What&rsquo;s included</div>
+          <ul class="include">
+            <li><strong>Bespoke Design</strong>Built around your brand. No templates.</li>
+            <li><strong>Mobile-First</strong>Designed for phones first.</li>
+            <li><strong>Copywriting</strong>Clear content that converts.</li>
+            <li><strong>SEO Foundations</strong>Google Business Profile, meta tags, indexing.</li>
+            <li><strong>Hosting Included</strong>SSL, security, and go-live hosting.</li>
+            <li><strong>Launch Support</strong>Help when you need it.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="sec">Global price guide</div>
+          <div class="matrix">
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>GBP</th>
+                  <th>AED</th>
+                  <th>USD</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Website + hosting</td>
+                  <td>£500</td>
+                  <td>2,500</td>
+                  <td>$650</td>
+                </tr>
+                <tr>
+                  <td>Extra development / hr</td>
+                  <td>£50</td>
+                  <td>250</td>
+                  <td>$65</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="extras">
+            <div class="extra">
+              <strong>E-Commerce CRM &amp; API links</strong><span class="badge">Extra</span><br />
+              Connect your store to CRM, payments, and inventory systems.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule"></div>
+
+      <div class="sec">Client references</div>
+      <div class="cases">
+        <div class="case">
+          <div class="sector">Hospitality</div>
+          <div class="name">The Red Cow</div>
+          <div class="link">theredcowchesterton.co.uk</div>
+        </div>
+        <div class="case">
+          <div class="sector">Technology</div>
+          <div class="name">Eagle AI Labs</div>
+          <div class="link">eagleailabs.com</div>
+        </div>
+        <div class="case">
+          <div class="sector">Finance</div>
+          <div class="name">Scalpx Capital</div>
+          <div class="link">scalpxcapital.com</div>
+        </div>
+        <div class="case">
+          <div class="sector">AI Studio</div>
+          <div class="name">Shift AI Tech</div>
+          <div class="link">shiftaitech.com</div>
+        </div>
+        <div class="case">
+          <div class="sector">Property</div>
+          <div class="name">Ready4Refurb</div>
+          <div class="link">ready4refurb.com</div>
+        </div>
+        <div class="case">
+          <div class="sector">Hospitality</div>
+          <div class="name">Mixa Restaurant</div>
+          <div class="link">mixarestaurant.com</div>
+        </div>
+      </div>
+
+      <div class="rule"></div>
+
+      <div class="sec">How it works</div>
+      <div class="process">
+        <div class="step"><div class="n">01</div><div class="t">Brief</div><div class="d">Tell us about your business</div></div>
+        <div class="step"><div class="n">02</div><div class="t">Design</div><div class="d">We mock up before we build</div></div>
+        <div class="step"><div class="n">03</div><div class="t">Build</div><div class="d">Clean code, fast loading</div></div>
+        <div class="step"><div class="n">04</div><div class="t">Launch</div><div class="d">Go live with full support</div></div>
+      </div>
+
+      <footer>
+        <div class="cta">
+          <div>
+            <h2>Let&rsquo;s <span>Work Together</span></h2>
+            <p>Scan the code or email us. Fixed package pricing — no hard sell.</p>
+            <div class="meta">partnerships@shiftaitech.com · shiftaitech.com/websites</div>
+            <div class="meta" id="ctaRef" style="display:none"></div>
+          </div>
+          <div class="qr-wrap">
+            <img id="qr" alt="QR code to websites page" width="120" height="120" />
+            <span>Open offer</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search)
+      var code = (params.get('ref') || params.get('referral') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '')
+      var target = 'https://shiftaitech.com/websites'
+      if (code) {
+        target += '?ref=' + encodeURIComponent(code)
+        var banner = document.getElementById('refBanner')
+        var refCode = document.getElementById('refCode')
+        var ctaRef = document.getElementById('ctaRef')
+        banner.classList.add('show')
+        refCode.textContent = code
+        ctaRef.style.display = 'block'
+        ctaRef.textContent = 'Referral code: ' + code
+        var back = document.querySelector('.toolbar a.ghost')
+        if (back) back.href = '/websites?ref=' + encodeURIComponent(code)
+      }
+      document.getElementById('qr').src =
+        'https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=8&data=' + encodeURIComponent(target)
+
+      // From the site "Export PDF" button (?print=1): hide toolbar and open print immediately.
+      if (params.get('print') === '1') {
+        document.body.classList.add('auto-print')
+        var printed = false
+        function triggerPrint() {
+          if (printed) return
+          printed = true
+          setTimeout(function () { window.print() }, 350)
+        }
+        if (document.readyState === 'complete') triggerPrint()
+        else window.addEventListener('load', triggerPrint)
+      }
+    })()
+  </script>
+</body>
+</html>
