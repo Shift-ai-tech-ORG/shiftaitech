@@ -48,8 +48,8 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p className="footer-copy">&copy; 2026 Shift AI Tech (Shift AI Technology Ltd). All rights reserved.</p>
-          <p className="footer-legal">United Kingdom · shiftaitech.com</p>
+          <p className="footer-copy">&copy; 2026 Shift AI Tech (Shift AI Technology Ltd · 17159725). All rights reserved.</p>
+          <p className="footer-legal">Unit 14, The Maltings, Hall Road, Southminster, Essex CM0 7EQ · shiftaitech.com</p>
         </div>
       </div>
     </footer>

@@ -45,18 +45,29 @@ const ORGANIZATION = {
   '@id': `${SITE}/#organization`,
   name: BRAND,
   legalName: 'Shift AI Technology Ltd',
-  alternateName: ['Shift AI Technology', 'ShiftAI Tech'],
+  alternateName: ['Shift AI Technology', 'ShiftAI Tech', 'Shift AI Tech UK'],
   url: SITE,
   logo: `${SITE}/shift-logo-new.png`,
   email: 'partnerships@shiftaitech.com',
-  description: DEFAULT_DESC,
+  description:
+    'Shift AI Tech (Shift AI Technology Ltd, company 17159725) is a UK AI studio that builds custom AI models, agents, RAG pipelines, automation, full product builds, and websites for British businesses. Not Shift Technology (insurance AI), not Shift AI at shiftai.co.uk (automotive), and not other unrelated Shift AI brands.',
   foundingDate: '2024',
+  identifier: {
+    '@type': 'PropertyValue',
+    name: 'Companies House number',
+    value: '17159725',
+    url: 'https://find-and-update.company-information.service.gov.uk/company/17159725',
+  },
   areaServed: {
     '@type': 'Country',
     name: 'United Kingdom',
   },
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'Unit 14, The Maltings Industrial Estate, Hall Road',
+    addressLocality: 'Southminster',
+    addressRegion: 'Essex',
+    postalCode: 'CM0 7EQ',
     addressCountry: 'GB',
   },
   contactPoint: [
@@ -68,6 +79,9 @@ const ORGANIZATION = {
       availableLanguage: ['English'],
     },
   ],
+  sameAs: [
+    'https://find-and-update.company-information.service.gov.uk/company/17159725',
+  ],
   knowsAbout: [
     'Artificial intelligence',
     'Custom AI models',
@@ -76,8 +90,11 @@ const ORGANIZATION = {
     'Business automation',
     'Product development',
     'Website design and SEO',
+    'UK SME AI adoption',
   ],
-  slogan: 'We build AI products that give businesses their edge.',
+  slogan: 'UK custom AI products — models, RAG and agents for British businesses.',
+  disambiguatingDescription:
+    'Independent UK AI product studio at shiftaitech.com. Distinct from Shift Technology, shiftai.co.uk, and other Shift AI brands.',
 }
 
 const WEBSITE = {
