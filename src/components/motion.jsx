@@ -1,20 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, animate, useInView, useReducedMotion } from 'framer-motion'
 
-/* Strong ease-out — built-in CSS easings are too weak */
 export const EASE = [0.23, 1, 0.32, 1]
 
-/* Scroll reveal that respects prefers-reduced-motion (cross-fade only). */
 export function Reveal({ children, delay = 0, className, as = 'div', ...rest }) {
   const reduce = useReducedMotion()
   const Tag = motion[as] || motion.div
   return (
     <Tag
       className={className}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
+      style={{ overflow: 'visible' }}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
       whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.6, ease: EASE, delay: Math.min(delay, 0.35) }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.85, ease: EASE, delay: Math.min(delay, 0.28) }}
       {...rest}
     >
       {children}
@@ -22,23 +21,60 @@ export function Reveal({ children, delay = 0, className, as = 'div', ...rest }) 
   )
 }
 
-/* Clip-path image reveal — media uncovers from the top as it enters the viewport. */
-export function MediaReveal({ children, className }) {
+export function MediaReveal({ children, className, ...rest }) {
   const reduce = useReducedMotion()
   return (
     <motion.div
       className={className}
-      initial={reduce ? { opacity: 0 } : { clipPath: 'inset(0 0 100% 0)' }}
-      whileInView={reduce ? { opacity: 1 } : { clipPath: 'inset(0 0 0% 0)' }}
+      {...rest}
+      initial={reduce ? { opacity: 0 } : { clipPath: 'inset(100% 0 0 0)', opacity: 1 }}
+      whileInView={reduce ? { opacity: 1 } : { clipPath: 'inset(0% 0 0 0)' }}
       viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.9, ease: EASE }}
+      transition={{ duration: 1.05, ease: EASE }}
     >
       {children}
     </motion.div>
   )
 }
 
-/* Count-up number that ticks to its value on first view. */
+export function SplitTitle({ children, className = '', as = 'h1' }) {
+  const reduce = useReducedMotion()
+  const [simple, setSimple] = useState(true)
+  const Tag = motion[as] || motion.h1
+  const words = String(children).trim().split(/\s+/)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 720px), (prefers-reduced-motion: reduce)')
+    const update = () => setSimple(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+
+  if (reduce || simple) {
+    const Static = as === 'h1' ? 'h1' : as === 'p' ? 'p' : 'h2'
+    const S = Static
+    return <S className={className}>{children}</S>
+  }
+
+  return (
+    <Tag className={`split-title ${className}`.trim()}>
+      {words.map((word, i) => (
+        <span key={`${word}-${i}`} className="split-word">
+          <motion.span
+            className="split-word-inner"
+            initial={{ y: '108%' }}
+            animate={{ y: '0%' }}
+            transition={{ duration: 0.95, ease: EASE, delay: 0.12 + i * 0.045 }}
+          >
+            {word}
+          </motion.span>
+        </span>
+      ))}
+    </Tag>
+  )
+}
+
 export function CountUp({ to, suffix = '' }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })

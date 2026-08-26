@@ -12,6 +12,8 @@ import OnboardingPage from './OnboardingPage.jsx'
 import WebsitesPage from './WebsitesPage.jsx'
 import Navigation from './components/Navigation.jsx'
 import Footer from './components/Footer.jsx'
+import SiteFX from './components/SiteFX.jsx'
+import Seo from './components/Seo.jsx'
 import { captureReferralFromSearch } from './lib/referral'
 
 captureReferralFromSearch()
@@ -19,6 +21,8 @@ captureReferralFromSearch()
 function AppShell() {
   return (
     <>
+      <Seo />
+      <SiteFX />
       <Navigation />
       <Routes>
         <Route path="/" element={<App />} />

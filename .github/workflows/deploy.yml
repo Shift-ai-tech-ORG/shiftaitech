@@ -20,24 +20,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Build
         run: npm run build
         env:
           VITE_FORMS_ENDPOINT: ${{ secrets.VITE_FORMS_ENDPOINT }}
-      
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -53,3 +53,31 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Notify IndexNow (Bing / ChatGPT search surface)
+        continue-on-error: true
+        run: |
+          curl -sS -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{
+              "host": "shiftaitech.com",
+              "key": "e1e40fbadc73cc1bec95ead487ae3f3f",
+              "keyLocation": "https://shiftaitech.com/e1e40fbadc73cc1bec95ead487ae3f3f.txt",
+              "urlList": [
+                "https://shiftaitech.com/",
+                "https://shiftaitech.com/websites",
+                "https://shiftaitech.com/our-story",
+                "https://shiftaitech.com/partners",
+                "https://shiftaitech.com/team",
+                "https://shiftaitech.com/blog",
+                "https://shiftaitech.com/onboarding",
+                "https://shiftaitech.com/llms.txt",
+                "https://shiftaitech.com/sitemap.xml"
+              ]
+            }' || true
+
+      - name: Ping Google and Bing sitemaps
+        continue-on-error: true
+        run: |
+          curl -sS "https://www.google.com/ping?sitemap=https://shiftaitech.com/sitemap.xml" || true
+          curl -sS "https://www.bing.com/ping?sitemap=https://shiftaitech.com/sitemap.xml" || true

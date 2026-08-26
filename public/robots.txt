@@ -1,0 +1,56 @@
+# Shift AI Tech — AI + search crawler policy
+# Allow indexing for AI answer engines and classic search.
+# https://shiftaitech.com
+
+User-agent: *
+Allow: /
+
+# OpenAI — ChatGPT Search & live fetch
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Anthropic — Claude search & training
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Google — Search, AI Overviews, Gemini
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft — Bing, Copilot (also feeds ChatGPT Search)
+User-agent: Bingbot
+Allow: /
+
+# Apple, DuckDuckGo, Common Crawl
+User-agent: Applebot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://shiftaitech.com/sitemap.xml

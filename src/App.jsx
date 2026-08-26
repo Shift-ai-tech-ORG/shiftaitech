@@ -1,264 +1,155 @@
-import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import {
   ArrowRight,
   ArrowUpRight,
   Mail,
   MapPin,
   Zap,
-  MessageSquare,
-  BarChart3,
-  Bot,
-  Search,
-  FileText,
-  Workflow,
-  Phone,
-  Database,
-  TrendingUp,
-  Activity,
-  Shield,
-  LineChart,
-  AlertTriangle,
-  Cpu,
-  Globe,
-  GraduationCap,
-  Utensils,
-  Users,
 } from 'lucide-react'
-import { Container, SectionLabel, SectionHeading, Button, Card } from './components/ui'
+import { Container, SectionHeading, DisplayTitle, Button } from './components/ui'
 import ContactForm from './components/ContactForm'
-import { EASE, Reveal, MediaReveal, CountUp } from './components/motion'
-import { keyMessages, caseStudyCategories, portfolio as portfolioData } from './data/projects'
+import { Reveal, MediaReveal } from './components/motion'
+import BreathingField from './components/BreathingField'
+import { portfolio as portfolioData } from './data/projects'
 import './App.css'
 
-const portfolioIcons = {
-  Shield,
-  GraduationCap,
-  Utensils,
-  Users,
-  Activity,
-  Search,
-}
+const featuredProjects = portfolioData.filter((p) => p.featured)
 
-const portfolio = portfolioData.map((p) => ({
-  ...p,
-  icon: portfolioIcons[p.iconKey],
-}))
-
-const featuredProjects = portfolio.filter((p) => p.featured)
-const compactProjects = portfolio.filter((p) => !p.featured)
-
-const IMG = {
-  finance: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80',
-  aiChip: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
-  data: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80',
-  server: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80',
-  office: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
-  skyline: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
-  meeting: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
-  localShop: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-}
-
-const techStack = [
-  'GPT-4o', 'Claude 3.5', 'Gemini 2.0', 'Llama 3', 'Mistral',
-  'LangChain', 'Pinecone', 'Bloomberg API', 'Alpaca', 'Interactive Brokers',
-  'OpenAI API', 'Anthropic API', 'Polygon.io', 'Refinitiv', 'QuantLib',
+const pillars = [
+  {
+    number: '01',
+    title: 'Clear decisions',
+    desc: 'We help you pick the right AI, not a pile of tools.',
+  },
+  {
+    number: '02',
+    title: 'Sharp products',
+    desc: 'Systems that look considered and actually ship.',
+  },
+  {
+    number: '03',
+    title: 'Commercial pace',
+    desc: 'Built to grow. Paid for, not just launched.',
+  },
 ]
 
 const services = [
   {
     number: '01',
-    title: 'Custom AI Models',
-    description: 'Fine-tuned models, RAG pipelines, predictive systems, autonomous agents. We work with GPT-4o, Claude, Llama, Mistral, and custom-trained architectures.',
-    img: IMG.aiChip,
+    title: 'Custom AI',
+    description: 'Models, agents, and RAG pipelines trained on your data.',
   },
   {
     number: '02',
-    title: 'Full Product Builds',
-    description: 'End-to-end development of AI-powered products, from initial concept through to live deployment. We own the full stack: frontend, backend, model integration, infrastructure.',
-    img: IMG.server,
+    title: 'Product builds',
+    description: 'Full-stack products from concept to live deployment.',
   },
   {
     number: '03',
-    title: 'Process Automation',
-    description: 'Replace manual, repetitive work with intelligent automation. Multi-step workflows, browser agents, data pipelines, email sequences — systems that run themselves.',
-    img: IMG.data,
+    title: 'Automation',
+    description: 'Workflows that replace slow, manual work.',
   },
   {
     number: '04',
-    title: 'AI Strategy',
-    description: 'We map the opportunity, identify the highest-ROI use cases, build the roadmap, and give you a clear picture of cost and timeline before you commit.',
-    img: IMG.meeting,
+    title: 'Strategy',
+    description: 'Where AI pays off. Scoped, priced, and clear before you commit.',
   },
-]
-
-const financeCapabilities = [
-  { icon: TrendingUp, title: 'Algorithmic Trading Systems', desc: 'Custom algo strategies built and backtested on real market data. Execution automation across equities, FX, crypto, and derivatives.' },
-  { icon: Activity, title: 'Signal Detection & Alpha Generation', desc: 'ML models that scan price action, order flow, and alternative data to surface tradeable signals before they become obvious.' },
-  { icon: AlertTriangle, title: 'Risk Modelling & Position Sizing', desc: 'Real-time portfolio risk engines. VAR, drawdown limits, correlation matrices, and automated position management.' },
-  { icon: LineChart, title: 'Market Sentiment Analysis', desc: 'NLP pipelines processing news, earnings calls, social media, and analyst reports to quantify sentiment in real time.' },
-  { icon: FileText, title: 'Regulatory Intelligence', desc: 'AI that monitors regulatory feeds, flags compliance risks, and drafts reports. Built for MiFID II, FCA, and ESMA frameworks.' },
-  { icon: Database, title: 'Market Data Pipelines', desc: 'High-throughput ingestion and structuring of tick data, order books, and alternative datasets. Clean feeds your models can trust.' },
-  { icon: Cpu, title: 'Quant Research Automation', desc: 'Automate the research cycle — hypothesis generation, backtesting, parameter optimisation, and reporting — so strategies ship faster.' },
-  { icon: Globe, title: 'Multi-Asset Intelligence', desc: 'Unified dashboards and AI assistants that synthesise data across asset classes, portfolios, and geographies into a single view.' },
-]
-
-const useCases = [
-  { icon: MessageSquare, title: 'AI Chatbots', desc: 'Customer support, lead qualification, and sales automation that operates around the clock.' },
-  { icon: FileText, title: 'Document AI', desc: 'Extract, analyse, and act on data from contracts, invoices, and reports instantly.' },
-  { icon: BarChart3, title: 'Predictive Models', desc: 'Demand forecasting, pricing engines, risk scoring — models trained on your actual data.' },
-  { icon: Search, title: 'AI Search', desc: 'Semantic search across your internal knowledge base, product catalogue, or document store.' },
-  { icon: Workflow, title: 'Workflow Automation', desc: 'Multi-step business processes automated end-to-end, from data ingestion to output delivery.' },
-  { icon: Bot, title: 'Custom LLM Solutions', desc: 'Fine-tuned models and RAG pipelines trained on your proprietary data and domain knowledge.' },
-  { icon: Zap, title: 'AI Agents', desc: 'Autonomous pipelines that research, act, and deliver results without human input.' },
-  { icon: Phone, title: 'Voice AI', desc: 'Phone agents that handle inbound calls, answer questions, and book appointments around the clock.' },
-  { icon: Database, title: 'Data Pipelines', desc: 'Ingest, clean, and structure messy data so your models have something solid to work with.' },
 ]
 
 const processSteps = [
-  { n: '01', title: 'Brief', desc: 'We listen. Understand your goals, constraints, and where AI fits.' },
-  { n: '02', title: 'Design', desc: 'We design the solution architecture and agree scope and cost upfront.' },
-  { n: '03', title: 'Build', desc: 'Rapid development using the best AI tools available. No bloat, no waste.' },
-  { n: '04', title: 'Deploy', desc: 'We ship, monitor, and iterate. Ongoing support as you scale.' },
+  { n: '01', title: 'Brief', desc: 'Goals, constraints, and where AI actually fits.' },
+  { n: '02', title: 'Design', desc: 'Architecture, scope, and cost, agreed upfront.' },
+  { n: '03', title: 'Build', desc: 'Fast delivery. No bloat, no waste.' },
+  { n: '04', title: 'Ship', desc: 'Live, monitored, and ready to iterate.' },
 ]
 
 const stats = [
-  { value: 'Day 1', label: 'Useful output from day one. No lengthy onboarding.' },
-  { value: 'Weeks', label: 'Typical time from brief to working prototype.' },
-  { value: 'UK', label: 'Based in the United Kingdom, working with businesses across Britain.' },
-  { value: '24/7', label: 'AI systems that work while you sleep.' },
-  { value: '100%', label: 'Founder-led. You speak directly to the people building it.' },
-  { value: 'Frontier', label: 'GPT-4o, Claude, Gemini, Llama. Always the best model for the job.' },
+  { value: 'Weeks', label: 'Brief to working prototype.' },
+  { value: 'Day 1', label: 'Useful output from the start.' },
+  { value: 'UK', label: 'Founder-led. Direct access.' },
 ]
 
-const scenarios = [
+const faqs = [
   {
-    type: 'Financial Markets',
-    problem: 'A proprietary trading firm was manually reviewing news and earnings releases to inform short-term equity positions. The process was slow, inconsistent, and limited to what the team could physically read.',
-    built: 'We built a real-time sentiment pipeline ingesting news feeds, SEC filings, and earnings call transcripts. An LLM scores each event by expected price impact and direction, feeding directly into their pre-trade screening workflow.',
-    outcome: 'Analysis time cut from 40 minutes to under 90 seconds per event.',
+    q: 'What does Shift AI Tech do?',
+    a: 'Shift AI Tech is a UK AI studio that builds custom AI models, agents, automation, full product builds, and websites for businesses that need a commercial edge.',
   },
   {
-    type: 'Local Business',
-    problem: 'A dental practice in Manchester had no online booking, a site that took 5 seconds to load on mobile, and three unanswered Google reviews. They had no idea how many enquiries they were losing.',
-    built: 'We audited the site, fixed their Google Business Profile, integrated an online booking system, and set up an AI receptionist for out-of-hours calls.',
-    outcome: '£2,100 upfront. £300/month ongoing.',
+    q: 'Are you the same as Shift Technology or other Shift AI brands?',
+    a: 'No. We are Shift AI Tech at shiftaitech.com — an independent UK studio. Not Shift Technology (insurance AI) and not Shift AI at shiftai.co.uk.',
   },
   {
-    type: 'AI Product',
-    problem: 'A UK startup needed a recommendation engine to surface the right products to each visitor based on browsing behaviour — without a data science team to build or maintain it.',
-    built: 'We built a RAG-based recommendation pipeline trained on their product catalogue and user data. Integrated directly into their existing platform with no infrastructure changes needed.',
-    outcome: 'Delivered in under 3 weeks.',
+    q: 'How fast can you ship?',
+    a: 'From brief to a working prototype in weeks, with useful output from day one.',
   },
   {
-    type: 'Process Automation',
-    problem: 'A professional services firm had hundreds of client contracts in a shared drive. Finding key clauses, flagging renewals, and answering basic contract questions took hours of manual work every week.',
-    built: 'We built a document AI pipeline that ingests their contracts, extracts key terms, flags upcoming renewals, and answers plain-English questions about any document instantly.',
-    outcome: '3+ hours saved per week from day one.',
+    q: 'Do you build websites as well as AI?',
+    a: 'Yes. Bespoke design, build, host, and SEO foundations. Fixed-price packages on our Websites page.',
   },
-]
-
-const localBizPricing = [
-  { service: 'Digital audit + full report', price: 'Free' },
-  { service: 'Google listing fix + profile setup', price: 'From £200' },
-  { service: 'New website (fast, mobile, converts)', price: 'From £1,500' },
-  { service: 'AI receptionist', price: 'From £300/month' },
-  { service: 'SEO + ongoing maintenance', price: 'From £200/month' },
 ]
 
 function App() {
   return (
     <div className="page">
 
-      {/* Hero */}
       <section className="hero">
-        <div className="hero-video-wrap" aria-hidden="true">
-          <video
-            className="hero-video"
-            src={`${import.meta.env.BASE_URL}hero-bg.mp4`}
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
-          <div className="hero-video-overlay" />
+        <div className="hero-art" aria-hidden="true">
+          <BreathingField />
         </div>
         <Container>
-          <Reveal className="hero-inner">
+          <div className="hero-inner">
+            <p className="hero-kicker">Shift AI Tech · AI studio · United Kingdom</p>
             <h1 className="hero-title">
-              <span className="hero-line">Proven <span className="text-accent">Hyper Agile</span></span>
-              <span className="hero-line">AI Solutions.</span>
+              We build AI products that give businesses their edge.
             </h1>
-            <p className="hero-sub">
-              We build AI products using AI tools — making us faster, leaner,
-              and more responsive than 80% of technology firms.
-            </p>
-            <p className="hero-bridge">
-              If you can imagine it, we can <span className="text-accent">build it</span>.
-            </p>
-            <div className="hero-actions">
-              <Button href="#contact">Start a Project</Button>
-              <Link to="/our-story" className="hero-story-link">
-                Read our story <ArrowRight size={15} />
-              </Link>
-            </div>
-          </Reveal>
+            <Reveal className="hero-sub" delay={0.12}>
+              Shift AI Tech builds custom models, automation, and full product builds.
+              From brief to live in weeks.
+            </Reveal>
+            <Reveal className="hero-actions" delay={0.2}>
+              <Button href="#contact">Start a project</Button>
+              <a href="#projects" className="hero-story-link" data-cursor="WORK">
+                See the work <ArrowRight size={15} />
+              </a>
+            </Reveal>
+          </div>
         </Container>
         <div className="hero-scroll-cue" aria-hidden="true">
           <span className="hero-scroll-cue-line" />
         </div>
       </section>
 
-      {/* Tech Ticker */}
-      <div className="ticker">
-        <div className="ticker-track">
-          {[...techStack, ...techStack].map((t, i) => (
-            <span key={i} className="ticker-item">{t}</span>
-          ))}
-        </div>
-      </div>
-
-      {/* Differentiator */}
-      <section className="differentiator">
+      <section className="approach">
         <Container>
-          <Reveal className="differentiator-inner">
-            <div className="differentiator-stat">
-              <span className="differentiator-number"><CountUp to={20} suffix="%" /></span>
-              <p className="differentiator-text">
-                of technology firms build AI products using AI tools. We are one of them.
-              </p>
-            </div>
-            <div className="differentiator-divider" />
-            <div className="differentiator-pills">
-              {['Hyper Agile', 'Income Generating', 'Time Saving', 'Cost Reducing'].map((p) => (
-                <span key={p} className="differentiator-pill">{p}</span>
-              ))}
-            </div>
+          <Reveal>
+            <p className="approach-statement">
+              Shaping how businesses use AI. Seen, trusted, and paid for.
+            </p>
           </Reveal>
+          <div className="approach-grid">
+            {pillars.map((p, i) => (
+              <Reveal key={p.title} className="approach-item" delay={i * 0.06}>
+                <span className="approach-num">{p.number}</span>
+                <h3 className="approach-title">{p.title}</h3>
+                <p className="approach-desc">{p.desc}</p>
+              </Reveal>
+            ))}
+          </div>
         </Container>
       </section>
 
-      {/* Services — Featured layout with images */}
-      <section id="solutions" className="section">
+      <section id="solutions" className="section section--capability">
         <Container>
-          <Reveal>
-            <SectionLabel>Services</SectionLabel>
-            <SectionHeading>What We Do</SectionHeading>
-            <p className="section-intro">
-              Four core capabilities, each refined through real-world delivery across regulated industries, startups, and enterprise.
-            </p>
+          <Reveal className="capability-header-copy">
+            <DisplayTitle>Capability</DisplayTitle>
+            <SectionHeading>What we build.</SectionHeading>
           </Reveal>
-          <div className="services-featured">
+          <div className="service-rows">
             {services.map((s, i) => (
-              <Reveal key={i} className="service-featured-card" delay={i * 0.07}>
-                <div className="service-featured-img">
-                  <img src={s.img} alt="" loading="lazy" />
-                  <div className="service-featured-img-overlay" />
-                  <span className="service-featured-num">{s.number}</span>
-                </div>
-                <div className="service-featured-body">
-                  <h3 className="service-featured-title">{s.title}</h3>
-                  <p className="service-featured-desc">{s.description}</p>
+              <Reveal key={s.title} className="service-row" delay={i * 0.05} data-cursor="BUILD">
+                <span className="service-row-num">{s.number}</span>
+                <div className="service-row-body">
+                  <h3 className="service-row-title">{s.title}</h3>
+                  <p className="service-row-desc">{s.description}</p>
                 </div>
               </Reveal>
             ))}
@@ -266,37 +157,16 @@ function App() {
         </Container>
       </section>
 
-      {/* Portfolio — Case studies */}
       <section id="projects" className="section section--dark">
         <Container>
           <Reveal>
-            <SectionLabel>Proven Track Record</SectionLabel>
-            <SectionHeading>Portfolio of Projects &amp; Partners</SectionHeading>
+            <DisplayTitle>Work</DisplayTitle>
+            <SectionHeading>Selected projects.</SectionHeading>
             <p className="section-intro">
-              Sector agnostic. Proven solutions across compliance, learning &amp; development, health &amp; life science, SaaS, and financial markets.
+              Real products across compliance, health, training, and finance.
             </p>
           </Reveal>
 
-          <Reveal className="key-messages">
-            <ul className="key-messages-list">
-              {keyMessages.map((msg) => (
-                <li key={msg}>{msg}</li>
-              ))}
-            </ul>
-          </Reveal>
-
-          <Reveal className="case-study-categories">
-            <p className="case-study-categories-label">Jump to a case study</p>
-            <div className="case-study-categories-strip">
-              {caseStudyCategories.map((cat) => (
-                <a key={cat.id} href={`#case-study-${cat.id}`} className="case-study-category">
-                  {cat.label}
-                </a>
-              ))}
-            </div>
-          </Reveal>
-
-          {/* Featured showcase — large alternating media panels */}
           <div className="showcase">
             {featuredProjects.map((p, i) => (
               <div
@@ -304,135 +174,40 @@ function App() {
                 id={`case-study-${p.id}`}
                 className={`showcase-item${i % 2 === 1 ? ' showcase-item--flip' : ''}`}
               >
-                <MediaReveal className="showcase-media">
+                <MediaReveal className="showcase-media" data-cursor="VIEW">
                   <div className="showcase-media-main">
                     <img src={p.images[0]} alt={`${p.partner} screenshot`} loading="lazy" />
                   </div>
-                  {p.images.length > 1 && (
-                    <div className="showcase-media-thumbs">
-                      {p.images.slice(1).map((src) => (
-                        <img key={src} src={src} alt={`${p.partner} screenshot`} loading="lazy" />
-                      ))}
-                    </div>
-                  )}
                 </MediaReveal>
                 <Reveal className="showcase-content" delay={0.12}>
                   <span className="showcase-sector">{p.sector}</span>
                   <h3 className="showcase-name">{p.partner}</h3>
-                  <p className="showcase-category">{p.category}</p>
-                  <p className="showcase-desc">{p.description}</p>
-                  <blockquote className="showcase-quote">
-                    <p className="showcase-quote-text">&ldquo;{p.quote}&rdquo;</p>
-                    <cite className="showcase-quote-ref">{p.reference}</cite>
-                  </blockquote>
-                  <div className="showcase-foot">
-                    <div className="showcase-tags">
-                      {p.tags.map((t) => <span key={t} className="tag">{t}</span>)}
-                    </div>
-                    {p.link && (
+                  <p className="showcase-desc">{p.short || p.description}</p>
+                  {p.link && (
+                    <div className="showcase-foot">
                       <a
                         href={p.link.href}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="showcase-link"
+                        data-cursor="VIEW"
                       >
                         {p.link.label} <ArrowUpRight size={14} />
                       </a>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </Reveal>
               </div>
             ))}
           </div>
-
-          {/* Compact grid — remaining case studies */}
-          <div className="portfolio-grid">
-            {compactProjects.map((p, i) => (
-              <Reveal key={p.id} id={`case-study-${p.id}`} delay={i * 0.07}>
-                <Card className="portfolio-card">
-                  <div className="portfolio-card-top">
-                    <span className="portfolio-sector">{p.sector}</span>
-                    <p.icon size={20} strokeWidth={1.5} className="portfolio-icon" />
-                  </div>
-                  <h3 className="portfolio-name">{p.partner}</h3>
-                  <p className="portfolio-category">{p.category}</p>
-                  <p className="portfolio-desc">{p.description}</p>
-                  <div className="portfolio-quote">
-                    <p className="portfolio-quote-text">&ldquo;{p.quote}&rdquo;</p>
-                    <p className="portfolio-quote-ref">{p.reference}</p>
-                  </div>
-                  <div className="portfolio-tags">
-                    {p.tags.map((t) => <span key={t} className="tag">{t}</span>)}
-                  </div>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
         </Container>
       </section>
 
-      {/* Financial Markets — Hero image + grid */}
-      <section id="markets" className="section section--finance">
-        <div className="finance-hero-img" aria-hidden="true">
-          <img src={IMG.finance} alt="" loading="lazy" />
-          <div className="finance-hero-overlay" />
-        </div>
+      <section className="section section--dark results">
         <Container>
-          <Reveal className="finance-header">
-            <SectionLabel>Core Speciality</SectionLabel>
-            <SectionHeading>Built for Financial Markets</SectionHeading>
-            <p className="section-intro section-intro--onDark">
-              Financial markets are our home ground. We build AI systems that trade, analyse, predict, and report — with the rigour regulated markets demand and the speed that gives you edge.
-            </p>
-          </Reveal>
-          <div className="finance-grid">
-            {financeCapabilities.map((cap, i) => (
-              <Reveal key={i} className="finance-card" delay={(i % 2) * 0.07}>
-                <div className="finance-card-icon">
-                  <cap.icon size={20} strokeWidth={1.5} />
-                </div>
-                <h3 className="finance-card-title">{cap.title}</h3>
-                <p className="finance-card-desc">{cap.desc}</p>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="finance-cta">
-            <Button href="#contact">Discuss a Markets Project</Button>
-            <span className="finance-note">Equities · FX · Crypto · Derivatives · Fixed Income</span>
-          </Reveal>
-        </Container>
-      </section>
-
-      {/* Use Cases — Visual grid */}
-      <section className="section section--surface">
-        <Container>
-          <div className="usecase-header">
-            <Reveal>
-              <SectionLabel>What We Build</SectionLabel>
-              <SectionHeading>If It Runs on AI, <span className="text-accent">We Build It</span></SectionHeading>
-            </Reveal>
-            <Reveal className="usecase-header-img" delay={0.1}>
-              <img src={IMG.server} alt="" loading="lazy" />
-            </Reveal>
-          </div>
-          <div className="usecase-grid">
-            {useCases.map((u, i) => (
-              <Reveal key={i} className="usecase-card" delay={(i % 3) * 0.06}>
-                <div className="usecase-icon"><u.icon size={20} strokeWidth={1.5} /></div>
-                <h3 className="usecase-title">{u.title}</h3>
-                <p className="usecase-desc">{u.desc}</p>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Stats */}
-      <section className="section section--dark">
-        <Container>
-          <div className="stats-grid">
+          <div className="stats-grid stats-grid--tight">
             {stats.map((s, i) => (
-              <Reveal key={i} className="stat-cell" delay={(i % 3) * 0.06}>
+              <Reveal key={s.value} className="stat-cell" delay={i * 0.04}>
                 <p className="stat-value">{s.value}</p>
                 <p className="stat-label">{s.label}</p>
               </Reveal>
@@ -441,161 +216,44 @@ function App() {
         </Container>
       </section>
 
-      {/* Process — Timeline */}
       <section id="work-with-us" className="section">
         <Container>
           <Reveal>
-            <SectionLabel>How We Work</SectionLabel>
-            <SectionHeading>From Idea to Live in Weeks</SectionHeading>
+            <DisplayTitle>Method</DisplayTitle>
+            <SectionHeading>From idea to live.</SectionHeading>
           </Reveal>
-          <div className="process-timeline">
+          <div className="process-grid">
             {processSteps.map((p, i) => (
-              <Reveal key={i} className="process-step" delay={i * 0.1}>
-                <div className="process-step-marker">
-                  <span className="process-step-dot" />
-                  {i < processSteps.length - 1 && (
-                    <motion.span
-                      className="process-step-line"
-                      initial={{ scaleY: 0 }}
-                      whileInView={{ scaleY: 1 }}
-                      viewport={{ once: true, margin: '-60px' }}
-                      transition={{ duration: 0.7, ease: EASE, delay: i * 0.1 + 0.2 }}
-                      style={{ transformOrigin: 'top' }}
-                    />
-                  )}
-                </div>
-                <div className="process-step-content">
-                  <span className="process-step-num">{p.n}</span>
-                  <h3 className="process-step-title">{p.title}</h3>
-                  <p className="process-step-desc">{p.desc}</p>
-                </div>
+              <Reveal key={p.title} className="process-card" delay={i * 0.05}>
+                <span className="process-card-num">{p.n}</span>
+                <h3 className="process-card-title">{p.title}</h3>
+                <p className="process-card-desc">{p.desc}</p>
               </Reveal>
             ))}
           </div>
         </Container>
       </section>
 
-      {/* Mid CTA — with background image */}
-      <section className="cta-band">
-        <div className="cta-band-bg" aria-hidden="true">
-          <img src={IMG.skyline} alt="" loading="lazy" />
-          <div className="cta-band-overlay" />
-        </div>
+      <section id="faq" className="section">
         <Container>
-          <Reveal className="cta-band-inner">
-            <h2 className="cta-band-title">
-              Ready to cut costs and <span className="text-accent">build smarter?</span>
-            </h2>
-            <p className="cta-band-sub">
-              One-off projects or ongoing retainers. No account managers. No nonsense.
+          <Reveal>
+            <DisplayTitle>FAQ</DisplayTitle>
+            <SectionHeading>Straight answers.</SectionHeading>
+            <p className="section-intro">
+              Clear answers about who we are and what we build.
             </p>
-            <Button href="#contact">Get a Free Consultation</Button>
           </Reveal>
-        </Container>
-      </section>
-
-      {/* Local Business — with image */}
-      <section id="local-business" className="section">
-        <Container>
-          <div className="localbiz-hero-row">
-            <Reveal className="localbiz-hero-text">
-              <SectionLabel>For UK Local Businesses</SectionLabel>
-              <SectionHeading>Something on Your Website Is Costing You Customers.</SectionHeading>
-              <p className="section-intro" style={{ marginBottom: 0 }}>
-                Most local businesses we work with — dentists, gyms, roofers, electricians, salons — are losing 2 to 5 enquiries a week without knowing it. Slow site, not showing up on Google, no way to book out of hours. We audit your digital presence for free and tell you exactly what&apos;s happening. Then we fix it.
-              </p>
-            </Reveal>
-            <Reveal className="localbiz-hero-img" delay={0.1}>
-              <img src={IMG.localShop} alt="" loading="lazy" />
-            </Reveal>
-          </div>
-
-          <div className="localbiz-steps">
-            {[
-              { n: '01', title: 'Free audit, 48 hours', desc: 'We look at your website speed, Google Business Profile, local search rankings, online booking, and reviews. You get a plain-English report back in 48 hours. No jargon, no obligation, no sales pitch.' },
-              { n: '02', title: 'We fix what\'s broken', desc: 'Site too slow? We fix it. Not showing up on Google Maps? We sort your listing. No way for customers to book or enquire online? We build that. Every fix is priced upfront with no surprises.' },
-              { n: '03', title: 'AI receptionist', desc: 'An AI that answers your phone, handles common questions, and books appointments — even at 11pm on a Sunday. You stop losing jobs to voicemail. Set up in a week, runs itself after that.' },
-            ].map((step, i) => (
-              <Reveal key={i} className="localbiz-step" delay={i * 0.08}>
-                <span className="localbiz-step-num">{step.n}</span>
-                <h3 className="localbiz-step-title">{step.title}</h3>
-                <p className="localbiz-step-desc">{step.desc}</p>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal className="localbiz-pricing">
-            <p className="localbiz-pricing-label">What It Costs</p>
-            <div className="localbiz-pricing-table">
-              {localBizPricing.map((row, i) => (
-                <div key={i} className="localbiz-pricing-row">
-                  <span>{row.service}</span>
-                  <span className="localbiz-pricing-price">{row.price}</span>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-
-          <Reveal className="localbiz-cta">
-            <Button href="#contact">Get Your Free Audit</Button>
-            <span className="localbiz-note">No commitment. 48-hour turnaround. Plain English results.</span>
-          </Reveal>
-        </Container>
-      </section>
-
-      {/* Why Us */}
-      <section className="section section--surface">
-        <Container>
-          <Reveal>
-            <SectionLabel>Why Shift AI Tech</SectionLabel>
-            <SectionHeading>This Is Why <span className="text-accent">We&apos;re Different</span></SectionHeading>
-          </Reveal>
-          <div className="why-grid">
-            {[
-              { title: 'We build AI using AI', desc: 'Only 20% of technology firms build AI products using AI tools. We\'re in that 20%. It means we move faster, iterate quicker, and pass the cost savings directly to you.' },
-              { title: 'Hyper agile by design', desc: 'No legacy processes. No bloated teams. We\'re structured to move at the speed of the market — from brief to working product in weeks, not quarters.' },
-              { title: 'We save you time and money', desc: 'Friction-free development spend. Everything is scoped, priced, and delivered with zero waste. You pay for results, not hours.' },
-              { title: 'Sector agnostic', desc: 'Proven solutions across compliance, learning & development, health & fitness, SaaS, and financial markets. If there\'s data and a problem, we can build the AI.' },
-            ].map((w, i) => (
-              <Reveal key={i} className="why-card" delay={(i % 2) * 0.08}>
-                <span className="why-num">0{i + 1}</span>
-                <h3 className="why-title">{w.title}</h3>
-                <p className="why-desc">{w.desc}</p>
+          <div className="faq-list">
+            {faqs.map((item, i) => (
+              <Reveal key={item.q} className="faq-item" delay={i * 0.04}>
+                <h3 className="faq-q">{item.q}</h3>
+                <p className="faq-a">{item.a}</p>
               </Reveal>
             ))}
           </div>
         </Container>
       </section>
 
-      {/* Scenarios */}
-      <section className="section section--dark">
-        <Container>
-          <Reveal>
-            <SectionLabel>Real Problems We Solve</SectionLabel>
-            <SectionHeading>What This Looks Like in Practice</SectionHeading>
-          </Reveal>
-          <div className="scenarios-grid">
-            {scenarios.map((s, i) => (
-              <Reveal key={i} delay={(i % 2) * 0.08}>
-                <Card className="scenario-card">
-                  <span className="scenario-type">{s.type}</span>
-                  <div className="scenario-block">
-                    <p className="scenario-label">The problem</p>
-                    <p className="scenario-text">{s.problem}</p>
-                  </div>
-                  <div className="scenario-block">
-                    <p className="scenario-label">What we built</p>
-                    <p className="scenario-text">{s.built}</p>
-                  </div>
-                  <p className="scenario-outcome">{s.outcome}</p>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Contact — with skyline bg */}
       <section id="contact" className="section section--contact">
         <div className="contact-bg" aria-hidden="true">
           <img
@@ -607,9 +265,8 @@ function App() {
         </div>
         <Container>
           <Reveal>
-            <SectionLabel>Contact</SectionLabel>
-            <SectionHeading>Let&apos;s Build Something</SectionHeading>
-            <p className="section-intro">Tell us about your project and let&apos;s get to work.</p>
+            <SectionHeading>Tell us what you need.</SectionHeading>
+            <p className="section-intro">We usually reply within a day.</p>
           </Reveal>
           <div className="contact-grid">
             <Reveal className="contact-info">
@@ -623,7 +280,7 @@ function App() {
               </div>
               <div className="contact-response">
                 <Zap size={14} />
-                We respond within 24 hours
+                Reply within 24 hours
               </div>
             </Reveal>
             <Reveal className="contact-form-wrap" delay={0.1}>

@@ -21,8 +21,9 @@ export const portfolio = [
     sector: 'Compliance & Finance',
     category: 'CRM / AI generated KYC & AML Reporting',
     partner: 'AML Intelligence Suite',
+    short: 'AML reporting that cuts compliance from days to hours.',
     description:
-      'Automated Anti-Money Laundering reporting platform for accountancy firms. Monitors transaction data, flags suspicious patterns with ML, and generates regulator-ready KYC & AML reports — reducing compliance workload from days to hours.',
+      'Automated Anti-Money Laundering reporting platform for accountancy firms. Monitors transaction data, flags suspicious patterns with ML, and generates regulator-ready KYC & AML reports, reducing compliance workload from days to hours.',
     tags: ['AML Reporting', 'KYC Automation', 'Financial Crime Detection'],
     quote:
       'What used to take our compliance team three days now takes under two hours. The accuracy and audit trail are exceptional.',
@@ -36,8 +37,9 @@ export const portfolio = [
     sector: 'Learning & Development',
     category: 'AI Learning & Development Training Videos',
     partner: 'AI Course Delivery Platform',
+    short: 'Training courses scripted, narrated, and delivered by AI.',
     description:
-      'End-to-end AI-powered content delivery for professional training providers. Courses scripted, narrated, and delivered by AI avatar instructors — scaling L&D without studio costs or scheduling constraints.',
+      'End-to-end AI-powered content delivery for professional training providers. Courses scripted, narrated, and delivered by AI avatar instructors, scaling L&D without studio costs or scheduling constraints.',
     tags: ['AI Avatars', 'Course Delivery', 'Training Video Automation'],
     quote:
       'We went from concept to a fully accredited, AI-delivered course catalogue in eight weeks. The cost saving versus traditional production is significant.',
@@ -55,11 +57,12 @@ export const portfolio = [
     sector: 'Health & Life Science',
     category: 'Sports & AI Health Life Science',
     partner: 'BioSense',
+    short: 'Personal health intelligence from blood panels and wearables.',
     description:
-      'Full-stack personalised health intelligence platform built by Shift AI Tech. Users upload blood results, connect wearables (Oura, Whoop, Garmin, Apple Health), and complete daily check-ins — Claude AI analyses biomarkers, detects patterns, and delivers tiered health insights with weekly reports.',
+      'Full-stack personalised health intelligence platform built by Shift AI Tech. Users upload blood results, connect wearables (Oura, Whoop, Garmin, Apple Health), and complete daily check-ins. Claude AI analyses biomarkers, detects patterns, and delivers tiered health insights with weekly reports.',
     tags: ['Claude AI', 'Wearable Integration', 'Biomarker Analysis', 'Next.js'],
     quote:
-      'From interactive POC to production — auth, blood-panel analysis, billing, and wearable sync in one continuous health intelligence product.',
+      'From interactive POC to production. Auth, blood-panel analysis, billing, and wearable sync in one continuous health intelligence product.',
     reference: 'Shift AI Tech · Product build',
     link: { href: 'https://bio-sense.ai/', label: 'bio-sense.ai' },
     images: ['/case-studies/biosense.jpg'],
@@ -72,7 +75,7 @@ export const portfolio = [
     category: 'AI Supplier & Customer Screener',
     partner: 'Supplier & Customer Intelligence Engine',
     description:
-      'AI screening platform for onboarding suppliers and high-value customers. Ingests company filings, sanctions lists, adverse media, and transaction history — scoring risk in real time and flagging entities that need manual review before contracts are signed.',
+      'AI screening platform for onboarding suppliers and high-value customers. Ingests company filings, sanctions lists, adverse media, and transaction history, scoring risk in real time and flagging entities that need manual review before contracts are signed.',
     tags: ['Supplier Screening', 'Customer Due Diligence', 'Risk Scoring'],
     quote:
       'Onboarding reviews that took analysts half a day now complete in minutes, with a full audit trail for every decision.',

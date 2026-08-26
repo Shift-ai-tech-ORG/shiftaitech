@@ -2,92 +2,89 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight, ArrowRight } from 'lucide-react'
 import { Container, SectionLabel, Button } from './components/ui'
 import { Reveal } from './components/motion'
+import BreathingField from './components/BreathingField'
 import './OurStoryPage.css'
+
+const beats = [
+  {
+    n: '01',
+    title: 'The commission',
+    body: 'In 2024 we funded advanced neural models to predict Bitcoin price moves. Over $650,000 across build, training, and infrastructure.',
+  },
+  {
+    n: '02',
+    title: 'The proof',
+    body: 'Those models helped create Infinite Point Capital, a U.S. regulated Bitcoin fund. Targeted AUM of $100 to $300 million. The systems had to perform. They did.',
+  },
+  {
+    n: '03',
+    title: 'The rebuild',
+    body: 'By 2026 the same systems were rebuilt with AI-assisted tooling. An 82% cut in development cost. Same standard. Far less waste.',
+  },
+  {
+    n: '04',
+    title: 'The studio',
+    body: 'That is the shift. Serious AI products, built faster and leaner. We lived it before the industry wrote the white papers. Now we build that way for clients.',
+  },
+]
 
 const researchPapers = [
   {
     id: 'research-paper-1',
-    title: 'Deloitte: State of AI in the Enterprise (January 2026)',
-    summary: 'How AI is driving productivity, efficiency and new business models.',
+    title: 'Deloitte: State of AI in the Enterprise',
+    summary: 'Productivity, efficiency, and new business models.',
     href: 'https://www.deloitte.com/content/dam/assets-shared/docs/about/2025/state-of-ai-2026-global.pdf',
     external: true,
   },
   {
     id: 'research-paper-2',
     title: 'McKinsey: The state of AI',
-    summary: 'A clear snapshot of enterprise AI adoption, scaling maturity, and where organisations are unlocking measurable value.',
+    summary: 'Enterprise adoption and where measurable value shows up.',
     href: 'https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai',
     external: true,
   },
   {
     id: 'research-paper-3',
     title: 'Shift AI: The AI Value Shift',
-    summary: 'How artificial intelligence is driving measurable business impact across cost, productivity, and growth.',
+    summary: 'Cost, productivity, and growth from real deployments.',
   },
 ]
 
 export default function OurStoryPage() {
   return (
-    <div className="subpage our-story-page">
-      <section className="subpage-hero">
+    <div className="page our-story-page">
+      <section className="story-hero">
+        <div className="story-hero-art" aria-hidden="true">
+          <BreathingField />
+        </div>
         <Container>
-          <Reveal>
-            <SectionLabel>Our Story</SectionLabel>
-            <h1 className="subpage-title">
-              Why <span className="text-accent">Shift AI</span> Exists
-            </h1>
-          </Reveal>
+          <div className="story-hero-inner">
+            <Reveal>
+              <p className="hero-kicker">Our story</p>
+              <h1 className="story-hero-title">
+                We built it the expensive way first.
+              </h1>
+              <p className="story-hero-sub">
+                Then AI tools cut the same build by 82%. That lesson is Shift.
+              </p>
+            </Reveal>
+          </div>
         </Container>
       </section>
 
       <section className="section">
-        <Container narrow>
-          <Reveal className="story-prose">
-            <p className="story-lead">
-              In 2024, the founding partners of Shift AI commissioned the development of advanced neural network models
-              designed to predict Bitcoin price movements.
-            </p>
-            <p>
-              The project required over $650,000 in capital across development, training, backtesting and infrastructure.
-              It was a serious undertaking built to institutional standards.
-            </p>
-            <p>
-              The result was a set of models so sophisticated that they contributed to the creation of Infinite Point
-              Capital, a U.S. regulated Bitcoin investment fund licensed to operate a customised, risk-managed BTC trading
-              strategy built on this technology.
-            </p>
-            <p>
-              With a targeted $100–300 million in assets under management, the stakes were high. The models had to
-              perform. And they did.
-            </p>
-            <p className="story-emphasis">
-              But the real breakthrough came later.
-            </p>
-            <p>
-              By 2026, the same systems were rebuilt using a new generation of AI-assisted development tooling. What once
-              required months of engineering effort and significant capital was reproduced with an 82% reduction in
-              development cost.
-            </p>
-            <p className="story-emphasis">
-              This moment revealed something much bigger.
-            </p>
-            <p>
-              It exposed a structural shift in how advanced software — and particularly AI systems — can be built.
-              Projects that once demanded enormous capital expenditure can now be delivered faster, leaner and far more
-              efficiently.
-            </p>
-            <p>
-              Leading consulting firms including Accenture, EY, McKinsey and Gartner are now publishing research
-              highlighting this same transformation across the global technology landscape.
-            </p>
-            <p>
-              We encourage you to explore some of this research yourself.
-            </p>
-            <p>
-              The industry is only beginning to recognise the scale of this shift. At Shift AI, we experienced it
-              first-hand — long before it became a widely discussed theme.
-            </p>
-          </Reveal>
+        <Container>
+          <div className="story-beats">
+            {beats.map((b, i) => (
+              <Reveal key={b.n} className="story-beat" delay={i * 0.05}>
+                <span className="story-beat-num">{b.n}</span>
+                <div className="story-beat-body">
+                  <h2 className="story-beat-title">{b.title}</h2>
+                  <p className="story-beat-text">{b.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </Container>
       </section>
 
@@ -95,7 +92,7 @@ export default function OurStoryPage() {
         <Container>
           <Reveal>
             <SectionLabel>Research</SectionLabel>
-            <h2 className="ui-section-heading">Explore the Research</h2>
+            <h2 className="ui-section-heading">Further reading</h2>
           </Reveal>
           <div className="research-list">
             {researchPapers.map((paper, i) => {
@@ -114,7 +111,7 @@ export default function OurStoryPage() {
 
               if (paper.external) {
                 return (
-                  <Reveal key={paper.id} delay={i * 0.06}>
+                  <Reveal key={paper.id} delay={i * 0.05}>
                     <a
                       href={paper.href}
                       target="_blank"
@@ -128,7 +125,7 @@ export default function OurStoryPage() {
               }
 
               return (
-                <Reveal key={paper.id} delay={i * 0.06}>
+                <Reveal key={paper.id} delay={i * 0.05}>
                   <Link to={`/research/${paper.id}`} className="research-row">
                     {inner}
                   </Link>
@@ -140,17 +137,13 @@ export default function OurStoryPage() {
       </section>
 
       <section className="section">
-        <Container narrow>
+        <Container>
           <Reveal className="story-close">
-            <p>At Shift AI, we didn&apos;t discover this transformation in theory.</p>
-            <p className="story-emphasis">We lived it.</p>
+            <h2 className="story-close-title">We didn&apos;t read this shift. We lived it.</h2>
             <p>
-              We learned through real development cycles, real capital investment and real-world deployment.
-              That experience now forms the foundation of our work.
+              Real capital. Real deployment. That experience is how we build for clients now.
             </p>
-            <div style={{ marginTop: '2.5rem' }}>
-              <Button href="/#contact">Start a Project</Button>
-            </div>
+            <Button href="/#contact">Start a project</Button>
           </Reveal>
         </Container>
       </section>

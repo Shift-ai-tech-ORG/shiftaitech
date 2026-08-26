@@ -1,4 +1,4 @@
-/** Quick-win website build + host offer — shared by landing page & flyer. */
+/** Quick-win website build + host offer: shared by landing page & flyer. */
 
 export const PACKAGE_PRICE = {
   gbp: { amount: 500, label: '£500', currency: 'GBP' },
@@ -19,7 +19,7 @@ export const INCLUDED = [
   },
   {
     title: 'Mobile-First',
-    desc: 'Designed for phones first — where most of your traffic lands.',
+    desc: 'Designed for phones first, where most of your traffic lands.',
   },
   {
     title: 'Copywriting',

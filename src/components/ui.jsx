@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react'
+import Magnetic from './Magnetic'
 
 export function Container({ children, className = '', narrow = false }) {
   return (
@@ -18,23 +19,35 @@ export function SectionHeading({ children, className = '' }) {
   return <h2 className={`ui-section-heading ${className}`.trim()}>{children}</h2>
 }
 
+export function DisplayTitle({ children, className = '' }) {
+  return <p className={`ui-display-title ${className}`.trim()}>{children}</p>
+}
+
 export function Button({ children, href, variant = 'primary', className = '', ...props }) {
   const cls = `ui-btn ui-btn--${variant} ${className}`.trim()
+  const inner = (
+    <>
+      <span>{children}</span>
+      <ArrowRight size={16} />
+    </>
+  )
 
   if (href) {
     return (
-      <a href={href} className={cls} {...props}>
-        <span>{children}</span>
-        <ArrowRight size={16} />
-      </a>
+      <Magnetic>
+        <a href={href} className={cls} data-cursor="GO" {...props}>
+          {inner}
+        </a>
+      </Magnetic>
     )
   }
 
   return (
-    <button className={cls} {...props}>
-      <span>{children}</span>
-      <ArrowRight size={16} />
-    </button>
+    <Magnetic>
+      <button className={cls} data-cursor="GO" {...props}>
+        {inner}
+      </button>
+    </Magnetic>
   )
 }
 

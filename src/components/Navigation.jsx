@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ArrowRight, Menu, X, Sun, Moon } from 'lucide-react'
+import Magnetic from './Magnetic'
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
@@ -32,13 +33,11 @@ export default function Navigation() {
   }, [location])
 
   const navLinks = [
-    { label: 'Projects', href: '/#projects', type: 'hash' },
+    { label: 'Work', href: '/#projects', type: 'hash' },
     { label: 'Services', href: '/#solutions', type: 'hash' },
-    { label: 'Websites', href: '/websites', type: 'route' },
-    { label: 'Partners', href: '/partners', type: 'route' },
     { label: 'Process', href: '/#work-with-us', type: 'hash' },
-    { label: 'Our Story', href: '/our-story', type: 'route' },
-    { label: 'Insights', href: '/blog', type: 'route' },
+    { label: 'Websites', href: '/websites', type: 'route' },
+    { label: 'Story', href: '/our-story', type: 'route' },
   ]
 
   const renderLink = (link) => {
@@ -51,6 +50,7 @@ export default function Navigation() {
           key={link.label}
           to={link.href}
           className={`nav-link${isActive ? ' nav-link--active' : ''}`}
+          data-cursor="GO"
         >
           {link.label}
         </Link>
@@ -59,14 +59,14 @@ export default function Navigation() {
 
     if (isHome) {
       return (
-        <a key={link.label} href={link.href.replace('/', '')} className="nav-link">
+        <a key={link.label} href={link.href.replace('/', '')} className="nav-link" data-cursor="GO">
           {link.label}
         </a>
       )
     }
 
     return (
-      <a key={link.label} href={link.href} className="nav-link">
+      <a key={link.label} href={link.href} className="nav-link" data-cursor="GO">
         {link.label}
       </a>
     )
@@ -102,10 +102,12 @@ export default function Navigation() {
               <Moon size={18} />
             </span>
           </button>
-          <a href={isHome ? '#contact' : '/#contact'} className="nav-cta">
-            <span>Get in Touch</span>
-            <ArrowRight size={15} />
-          </a>
+          <Magnetic>
+            <a href={isHome ? '#contact' : '/#contact'} className="nav-cta" data-cursor="GO">
+              <span>Get in Touch</span>
+              <ArrowRight size={15} />
+            </a>
+          </Magnetic>
           <button
             className="nav-mobile-toggle"
             onClick={() => setMobileOpen(!mobileOpen)}

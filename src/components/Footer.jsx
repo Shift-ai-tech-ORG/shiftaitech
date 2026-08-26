@@ -15,7 +15,7 @@ export default function Footer() {
               />
             </Link>
             <p className="footer-tagline">
-              Custom AI models, full product builds, and intelligent automation for businesses across the United Kingdom.
+              Shift AI Tech — AI products that ship, for businesses that need an edge.
             </p>
           </div>
 
@@ -29,10 +29,10 @@ export default function Footer() {
 
           <div className="footer-nav-group">
             <p className="footer-nav-label">Services</p>
-            <a href="/#solutions" className="footer-nav-link">Custom AI Models</a>
-            <a href="/#solutions" className="footer-nav-link">Full Product Builds</a>
-            <a href="/#solutions" className="footer-nav-link">Process Automation</a>
-            <a href="/#solutions" className="footer-nav-link">AI Strategy</a>
+            <a href="/#solutions" className="footer-nav-link">Custom AI</a>
+            <a href="/#solutions" className="footer-nav-link">Product builds</a>
+            <a href="/#solutions" className="footer-nav-link">Automation</a>
+            <a href="/#solutions" className="footer-nav-link">Strategy</a>
           </div>
 
           <div className="footer-nav-group">
@@ -48,8 +48,8 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p className="footer-copy">&copy; 2026 Shift AI Tech. All rights reserved.</p>
-          <p className="footer-legal">United Kingdom</p>
+          <p className="footer-copy">&copy; 2026 Shift AI Tech (Shift AI Technology Ltd). All rights reserved.</p>
+          <p className="footer-legal">United Kingdom · shiftaitech.com</p>
         </div>
       </div>
     </footer>

@@ -1,0 +1,34 @@
+# Shift AI Tech
+
+> UK AI studio that builds custom AI products, automation, and websites that get found and convert.
+
+Shift AI Tech (legal: Shift AI Technology Ltd) is a founder-led AI product studio based in the United Kingdom. We build custom AI models, agents, RAG pipelines, full-stack products, and marketing websites for businesses that need a commercial edge. Not to be confused with Shift Technology (insurance AI) or other "Shift AI" brands — our domain is shiftaitech.com.
+
+## Primary pages
+
+- [Home](https://shiftaitech.com/): Overview of Shift AI Tech — custom AI, product builds, automation, strategy
+- [Websites](https://shiftaitech.com/websites): Fixed-price website design, build, host, and SEO foundations
+- [Our Story](https://shiftaitech.com/our-story): How we funded neural models for Bitcoin prediction and cut rebuild cost 82% with AI tooling
+- [Partners](https://shiftaitech.com/partners): Partnership and collaboration
+- [Team](https://shiftaitech.com/team): People behind Shift AI Tech
+- [Insights](https://shiftaitech.com/blog): Articles and research notes
+- [Onboarding](https://shiftaitech.com/onboarding): Start a project with Shift AI Tech
+
+## Services
+
+- Custom AI: models, agents, and RAG on your data
+- Product builds: concept to live deployment
+- Automation: replace slow manual workflows
+- Strategy: scoped, priced AI opportunities before you commit
+- Websites: bespoke design, mobile-first, SEO, hosting included
+
+## Contact
+
+- Website: https://shiftaitech.com
+- Email: partnerships@shiftaitech.com / jack@shiftaitech.com
+- Location: United Kingdom
+
+## Optional
+
+- [Full site summary for AI agents](https://shiftaitech.com/llms-full.txt)
+- [Sitemap](https://shiftaitech.com/sitemap.xml)
