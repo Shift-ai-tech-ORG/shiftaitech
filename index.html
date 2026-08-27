@@ -101,9 +101,11 @@
           window.history.replaceState(null, null, p + l.hash)
         }
         try {
-          var theme = localStorage.getItem('theme') || 'light'
-          document.documentElement.setAttribute('data-theme', theme)
-        } catch (e) {}
+          localStorage.setItem('theme', 'dark')
+          document.documentElement.setAttribute('data-theme', 'dark')
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark')
+        }
       }(window.location))
     </script>
   </head>

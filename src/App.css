@@ -409,6 +409,13 @@
 .nav-mobile .nav-link {
   font-size: 1.125rem;
   padding: 0.75rem 0;
+  color: var(--text-primary);
+}
+
+.nav--hero .nav-mobile .nav-link,
+.nav--hero .nav-mobile .nav-link:hover,
+.nav--hero .nav-mobile .nav-link--active {
+  color: var(--text-primary);
 }
 
 .nav-mobile-cta {

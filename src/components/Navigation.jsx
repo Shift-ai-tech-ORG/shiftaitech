@@ -1,26 +1,18 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ArrowRight, Menu, X, Sun, Moon } from 'lucide-react'
+import { ArrowRight, Menu, X } from 'lucide-react'
 import Magnetic from './Magnetic'
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') || 'light'
-    }
-    return 'light'
-  })
   const location = useLocation()
   const isHome = location.pathname === '/'
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-    localStorage.setItem('theme', theme)
-  }, [theme])
-
-  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark')
+    document.documentElement.setAttribute('data-theme', 'dark')
+    localStorage.setItem('theme', 'dark')
+  }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -72,9 +64,9 @@ export default function Navigation() {
     )
   }
 
-    const inHero = isHome && !scrolled
+  const inHero = isHome && !scrolled
 
-    return (
+  return (
     <nav className={`nav${scrolled || !isHome ? ' nav--scrolled' : ''}${mobileOpen ? ' nav--open' : ''}${inHero ? ' nav--hero' : ''}`}>
       <div className="nav-container">
         <Link to="/" className="nav-logo" aria-label="Shift AI Tech home">
@@ -90,18 +82,6 @@ export default function Navigation() {
         </div>
 
         <div className="nav-right">
-          <button
-            className="nav-theme-toggle"
-            onClick={toggleTheme}
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-          >
-            <span className="nav-theme-icon nav-theme-icon--sun" aria-hidden="true">
-              <Sun size={18} />
-            </span>
-            <span className="nav-theme-icon nav-theme-icon--moon" aria-hidden="true">
-              <Moon size={18} />
-            </span>
-          </button>
           <Magnetic>
             <a href={isHome ? '#contact' : '/#contact'} className="nav-cta" data-cursor="GO">
               <span>Get in Touch</span>
