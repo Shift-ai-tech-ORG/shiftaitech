@@ -15,7 +15,7 @@ export default function Footer() {
               />
             </Link>
             <p className="footer-tagline">
-              Shift AI Tech — AI products that ship, for businesses that need an edge.
+              Shift AI Tech. AI products that ship, for businesses that need an edge.
             </p>
           </div>
 

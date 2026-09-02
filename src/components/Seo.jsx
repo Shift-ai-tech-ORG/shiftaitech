@@ -8,7 +8,7 @@ const DEFAULT_DESC =
 
 const ROUTES = {
   '/': {
-    title: 'Shift AI Tech — We Build AI That Works',
+    title: 'Shift AI Tech · We Build AI That Works',
     description: DEFAULT_DESC,
   },
   '/websites': {
@@ -17,25 +17,25 @@ const ROUTES = {
       'Shift AI Tech designs, builds, and hosts bespoke websites with SEO foundations. Fixed price. Fast delivery. United Kingdom.',
   },
   '/our-story': {
-    title: 'Our Story — Shift AI Tech',
+    title: 'Our Story · Shift AI Tech',
     description:
       'How Shift AI Tech funded Bitcoin prediction models, then cut the same rebuild by 82% with AI tooling. UK AI product studio.',
   },
   '/partners': {
-    title: 'Partners — Shift AI Tech',
+    title: 'Partners · Shift AI Tech',
     description:
       'Strategic partners of Shift AI Tech, including RAMDVG for cryptographic tokenisation of real-world assets.',
   },
   '/team': {
-    title: 'Team — Shift AI Tech',
+    title: 'Team · Shift AI Tech',
     description: 'Meet the founder-led team behind Shift AI Tech, the UK AI product studio.',
   },
   '/blog': {
-    title: 'Insights — Shift AI Tech',
-    description: 'AI product insights from Shift AI Tech — custom models, automation, and shipping AI that works.',
+    title: 'Insights · Shift AI Tech',
+    description: 'AI product insights from Shift AI Tech: custom models, automation, and shipping AI that works.',
   },
   '/onboarding': {
-    title: 'Start a Project — Shift AI Tech',
+    title: 'Start a Project · Shift AI Tech',
     description: 'Onboard with Shift AI Tech to scope and ship custom AI, automation, or a new website.',
   },
 }
@@ -93,7 +93,7 @@ const ORGANIZATION = {
     'Website design and SEO',
     'UK SME AI adoption',
   ],
-  slogan: 'UK custom AI products — models, RAG and agents for British businesses.',
+  slogan: 'UK custom AI products: models, RAG and agents for British businesses.',
   disambiguatingDescription:
     'Independent UK AI product studio at shiftaitech.com. Distinct from Shift Technology, shiftai.co.uk, and other Shift AI brands.',
 }
@@ -255,7 +255,7 @@ export default function Seo() {
   useEffect(() => {
     const path = pathname.endsWith('/') && pathname !== '/' ? pathname.slice(0, -1) : pathname
     const page = ROUTES[path] || {
-      title: `${BRAND} — AI Studio UK`,
+      title: `${BRAND} · AI Studio UK`,
       description: DEFAULT_DESC,
     }
     const url = `${SITE}${path === '/' ? '/' : path}`

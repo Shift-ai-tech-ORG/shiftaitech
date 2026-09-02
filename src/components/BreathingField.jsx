@@ -7,7 +7,7 @@ void main() {
 }
 `
 
-/* Kota fluid river — vertical paint streams, Shift purple palette */
+/* Kota fluid river - vertical paint streams, Shift purple palette */
 const FRAG = `
 precision highp float;
 uniform vec2 u_res;
@@ -41,7 +41,7 @@ float fbm(vec2 p) {
   return v;
 }
 
-// One flowing ribbon — distance to a warped vertical curve
+// One flowing ribbon - distance to a warped vertical curve
 float ribbon(vec2 p, float x0, float w, float t, float phase) {
   float bend = sin(p.y * 1.8 + t * 0.7 + phase) * 0.16
              + sin(p.y * 3.6 - t * 1.1 + phase * 1.7) * 0.07;
@@ -131,7 +131,7 @@ function createProgram(gl, vertSrc, fragSrc) {
 }
 
 /**
- * Fluid river — Kota-style vertical paint streams in Shift purple.
+ * Fluid river - Kota-style vertical paint streams in Shift purple.
  */
 export default function BreathingField({ className = '', interactive = true }) {
   const canvasRef = useRef(null)

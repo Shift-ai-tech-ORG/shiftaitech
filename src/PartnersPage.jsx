@@ -11,9 +11,9 @@ const partners = [
     role: 'Tokenisation platform partner',
     tagline: 'Cryptographic tokenisation for real-world assets.',
     summary:
-      'RAMDVG built RAMGET — a patent-pending platform that ties uniquely identifiable assets to a secure, cryptographically linked data core. Ownership, provenance, maintenance history, and compliance travel with the asset as one tradeable unit. Their AI layer, SEEMOR, opens that protected data through natural-language queries for finance, operations, and legal teams.',
+      'RAMDVG built RAMGET, a patent-pending platform that ties uniquely identifiable assets to a secure, cryptographically linked data core. Ownership, provenance, maintenance history, and compliance travel with the asset as one tradeable unit. Their AI layer, SEEMOR, opens that protected data through natural-language queries for finance, operations, and legal teams.',
     body:
-      'They started where the bar is highest: commercial aviation. Most regulated. Most data-heavy. Highest need for integrity. If it works on aircraft, it works on art, infrastructure, energy, and beyond. Shift partners with RAMDVG to layer production AI onto that tokenised foundation — so law firms and asset owners get systems that ship, not slide decks.',
+      'They started where the bar is highest: commercial aviation. Most regulated. Most data-heavy. Highest need for integrity. If it works on aircraft, it works on art, infrastructure, energy, and beyond. Shift partners with RAMDVG to layer production AI onto that tokenised foundation, so law firms and asset owners get systems that ship, not slide decks.',
     points: [
       'RAMGET tokens with inseparable, immutable asset data',
       'SEEMOR AI for natural-language insight on protected records',

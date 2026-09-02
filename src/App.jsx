@@ -75,7 +75,7 @@ const faqs = [
   },
   {
     q: 'Are you the same as Shift Technology or other Shift AI brands?',
-    a: 'No. We are Shift AI Tech at shiftaitech.com — an independent UK studio. Not Shift Technology (insurance AI) and not Shift AI at shiftai.co.uk.',
+    a: 'No. We are Shift AI Tech at shiftaitech.com, an independent UK studio. Not Shift Technology (insurance AI) and not Shift AI at shiftai.co.uk.',
   },
   {
     q: 'How fast can you ship?',

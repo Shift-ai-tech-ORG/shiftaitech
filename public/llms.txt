@@ -8,7 +8,7 @@ Disambiguation: not Shift Technology (insurance AI at shift-technology.com), not
 
 ## Primary pages
 
-- [Home](https://shiftaitech.com/): Overview of Shift AI Tech — custom AI, product builds, automation, strategy
+- [Home](https://shiftaitech.com/): Overview of Shift AI Tech: custom AI, product builds, automation, strategy
 - [Websites](https://shiftaitech.com/websites/): Fixed-price website design, build, host, and SEO foundations
 - [Our Story](https://shiftaitech.com/our-story/): How we funded neural models for Bitcoin prediction and cut rebuild cost 82% with AI tooling
 - [Partners](https://shiftaitech.com/partners/): Partnership and collaboration
