@@ -1,64 +1,89 @@
-import { Container, SectionLabel } from './components/ui'
+import { ArrowUpRight } from 'lucide-react'
+import { Container, Button } from './components/ui'
 import { Reveal } from './components/motion'
+import BreathingField from './components/BreathingField'
 import './PartnersPage.css'
 
-const teamMembers = [
+/**
+ * Strategic partners. Darren will supply the final RAMDVG narrative —
+ * keep copy factual and short until that lands.
+ */
+const partners = [
   {
-    name: '',
-    role: 'Partner',
+    id: 'ramdvg',
+    name: 'RAMDVG',
+    role: 'Tokenisation platform partner',
     summary:
-      'Co-founder of Shift AI Tech. Leads product strategy, client partnerships, and technical delivery across AI and web projects.',
-  },
-  {
-    name: '',
-    role: 'Partner',
-    summary:
-      'Co-founder of Shift AI Tech. Drives business development, operations, and growth strategy across the company.',
-  },
-  {
-    name: '',
-    role: 'Partner',
-    summary:
-      'Co-founder of Shift AI Tech. Brings strategic insight and executional leadership to every engagement.',
+      'Joint partner for AI-enabled solutions alongside RAMDVG’s cryptographic tokenisation platform for real-world assets. Together we support legal and commercial teams deploying AI on top of immutable, data-rich digital twins.',
+    href: 'https://ramdvg.com/',
+    hrefLabel: 'ramdvg.com',
   },
 ]
 
 export default function PartnersPage() {
   return (
-    <div className="subpage partners-page">
-      <section className="subpage-hero">
+    <div className="page partners-page">
+      <section className="partners-hero">
+        <div className="partners-hero-art" aria-hidden="true">
+          <BreathingField />
+        </div>
         <Container>
-          <Reveal>
-            <SectionLabel>Partners</SectionLabel>
-            <h1 className="subpage-title">Meet the Partners Behind Shift</h1>
-            <p className="subpage-sub">
-              The people driving Shift AI Tech forward. Strategy, delivery, and growth.
-            </p>
-          </Reveal>
+          <div className="partners-hero-inner">
+            <Reveal>
+              <p className="hero-kicker">Partners</p>
+              <h1 className="partners-hero-title">
+                Built with the right partners.
+              </h1>
+              <p className="partners-hero-sub">
+                Strategic alliances that extend what Shift ships — tokenisation,
+                infrastructure, and delivery credibility for serious AI work.
+              </p>
+            </Reveal>
+          </div>
         </Container>
       </section>
 
       <section className="section">
         <Container>
-          <div className="partners-grid">
-            {teamMembers.map((member, i) => (
-              <Reveal
-                key={member.name + member.role}
-                as="article"
-                className="partner-card"
-                delay={i * 0.07}
-              >
-                {member.image && (
-                  <div className="partner-img-wrap">
-                    <img src={member.image} alt={member.name} className="partner-img" />
-                  </div>
-                )}
-                <p className="partner-role">{member.role}</p>
-                <h2 className="partner-name">{member.name}</h2>
-                <p className="partner-summary">{member.summary}</p>
+          <div className="partners-list">
+            {partners.map((p, i) => (
+              <Reveal key={p.id} className="partners-row" delay={i * 0.06}>
+                <div className="partners-row-meta">
+                  <p className="partners-row-role">{p.role}</p>
+                  <h2 className="partners-row-name">{p.name}</h2>
+                </div>
+                <div className="partners-row-body">
+                  <p className="partners-row-summary">{p.summary}</p>
+                  {p.href && (
+                    <a
+                      href={p.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="partners-row-link"
+                      data-cursor="VIEW"
+                    >
+                      {p.hrefLabel || p.href} <ArrowUpRight size={14} />
+                    </a>
+                  )}
+                </div>
               </Reveal>
             ))}
           </div>
+        </Container>
+      </section>
+
+      <section className="section partners-cta-section">
+        <Container>
+          <Reveal className="partners-cta">
+            <h2 className="partners-cta-title">Want to partner with Shift?</h2>
+            <p className="partners-cta-sub">
+              Technology, legal, and delivery partners who want to take AI into
+              production with us.
+            </p>
+            <Button href="mailto:partnerships@shiftaitech.com">
+              Talk partnerships
+            </Button>
+          </Reveal>
         </Container>
       </section>
     </div>

@@ -23,7 +23,8 @@ const ROUTES = {
   },
   '/partners': {
     title: 'Partners — Shift AI Tech',
-    description: 'Partner with Shift AI Tech on AI products, automation, and websites.',
+    description:
+      'Strategic partners of Shift AI Tech, including RAMDVG for cryptographic tokenisation of real-world assets.',
   },
   '/team': {
     title: 'Team — Shift AI Tech',
