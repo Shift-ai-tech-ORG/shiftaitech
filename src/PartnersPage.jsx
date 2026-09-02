@@ -4,19 +4,23 @@ import { Reveal } from './components/motion'
 import BreathingField from './components/BreathingField'
 import './PartnersPage.css'
 
-/**
- * Strategic partners. Darren will supply the final RAMDVG narrative —
- * keep copy factual and short until that lands.
- */
 const partners = [
   {
     id: 'ramdvg',
     name: 'RAMDVG',
     role: 'Tokenisation platform partner',
+    tagline: 'Cryptographic tokenisation for real-world assets.',
     summary:
-      'Joint partner for AI-enabled solutions alongside RAMDVG’s cryptographic tokenisation platform for real-world assets. Together we support legal and commercial teams deploying AI on top of immutable, data-rich digital twins.',
+      'RAMDVG built RAMGET — a patent-pending platform that ties uniquely identifiable assets to a secure, cryptographically linked data core. Ownership, provenance, maintenance history, and compliance travel with the asset as one tradeable unit. Their AI layer, SEEMOR, opens that protected data through natural-language queries for finance, operations, and legal teams.',
+    body:
+      'They started where the bar is highest: commercial aviation. Most regulated. Most data-heavy. Highest need for integrity. If it works on aircraft, it works on art, infrastructure, energy, and beyond. Shift partners with RAMDVG to layer production AI onto that tokenised foundation — so law firms and asset owners get systems that ship, not slide decks.',
+    points: [
+      'RAMGET tokens with inseparable, immutable asset data',
+      'SEEMOR AI for natural-language insight on protected records',
+      'Built for aviation complexity; ready across high-value asset classes',
+    ],
     href: 'https://ramdvg.com/',
-    hrefLabel: 'ramdvg.com',
+    hrefLabel: 'Visit ramdvg.com',
   },
 ]
 
@@ -35,7 +39,7 @@ export default function PartnersPage() {
                 Built with the right partners.
               </h1>
               <p className="partners-hero-sub">
-                Strategic alliances that extend what Shift ships — tokenisation,
+                Strategic alliances that extend what Shift ships. Tokenisation,
                 infrastructure, and delivery credibility for serious AI work.
               </p>
             </Reveal>
@@ -51,9 +55,24 @@ export default function PartnersPage() {
                 <div className="partners-row-meta">
                   <p className="partners-row-role">{p.role}</p>
                   <h2 className="partners-row-name">{p.name}</h2>
+                  {p.tagline && (
+                    <p className="partners-row-tagline">{p.tagline}</p>
+                  )}
                 </div>
                 <div className="partners-row-body">
                   <p className="partners-row-summary">{p.summary}</p>
+                  {p.body && (
+                    <p className="partners-row-summary partners-row-summary--follow">
+                      {p.body}
+                    </p>
+                  )}
+                  {p.points?.length > 0 && (
+                    <ul className="partners-row-points">
+                      {p.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  )}
                   {p.href && (
                     <a
                       href={p.href}
