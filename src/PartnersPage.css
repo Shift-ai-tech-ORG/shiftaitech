@@ -57,7 +57,30 @@
   font-size: 1.0625rem;
   line-height: 1.65;
   color: var(--text-secondary);
-  max-width: 32rem;
+  max-width: 34rem;
+}
+
+.partners-intro-section {
+  padding-top: 0;
+  padding-bottom: 1rem;
+}
+
+.partners-intro {
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.partners-intro p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.partners-intro-lead {
+  color: var(--text-primary) !important;
+  font-weight: 500;
 }
 
 /* Showcase layout mirrors homepage case studies, slightly lighter */

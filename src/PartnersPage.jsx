@@ -8,19 +8,10 @@ const partners = [
   {
     id: 'ramdvg',
     name: 'RAMDVG',
-    role: 'Tokenisation platform partner',
-    sector: 'Real-world assets · Aviation-first',
+    role: 'Tokenisation asset exchange platform',
+    sector: 'Real-world assets',
     short:
-      'Cryptographic tokenisation that couples high-value assets to an immutable data core, with AI on top.',
-    summary:
-      'RAMDVG built RAMGET, a patent-pending platform that ties uniquely identifiable assets to a secure, cryptographically linked data core. Ownership, provenance, maintenance history, and compliance travel with the asset as one tradeable unit. Their AI layer, SEEMOR, opens that protected data through natural-language queries for finance, operations, and legal teams.',
-    body:
-      'They started where the bar is highest: commercial aviation. Most regulated. Most data-heavy. Highest need for integrity. Shift partners with RAMDVG to layer production AI onto that tokenised foundation, so law firms and asset owners get systems that ship, not slide decks.',
-    points: [
-      'RAMGET tokens with inseparable, immutable asset data',
-      'SEEMOR AI for natural-language insight on protected records',
-      'Built for aviation complexity; ready across high-value asset classes',
-    ],
+      'Uniquely identifiable assets are tied directly to their own secure, cryptographically linked data core.',
     images: [
       '/partners/ramdvg-hero.jpg',
       '/partners/ramdvg-aviation.jpg',
@@ -43,14 +34,36 @@ export default function PartnersPage() {
             <Reveal>
               <p className="hero-kicker">Partners</p>
               <h1 className="partners-hero-title">
-                Built with the right partners.
+                AI specialised partners.
               </h1>
               <p className="partners-hero-sub">
-                Strategic alliances that extend what Shift ships. Tokenisation,
-                infrastructure, and delivery credibility for serious AI work.
+                Today, AI extends across all business sectors and industries.
+                From large to small, every business is looking for a competitive
+                edge. AI executed correctly can offer some amazing commercial
+                benefits.
               </p>
             </Reveal>
           </div>
+        </Container>
+      </section>
+
+      <section className="section partners-intro-section">
+        <Container>
+          <Reveal className="partners-intro">
+            <p>
+              At Shift we put business needs first, applying AI to accelerate
+              revenues and save costs.
+            </p>
+            <p>
+              Which is why we partner with key specialist AI technology
+              providers. Firms that have proven experience, credibility and
+              above all a passion to provide world class business services.
+            </p>
+            <p className="partners-intro-lead">
+              Enclosed are a sample of our specialist AI partners and the
+              sectors that they are experts in.
+            </p>
+          </Reveal>
         </Container>
       </section>
 
@@ -73,12 +86,7 @@ export default function PartnersPage() {
                   {p.images.length > 1 && (
                     <div className="partners-showcase-thumbs">
                       {p.images.slice(1, 3).map((src) => (
-                        <img
-                          key={src}
-                          src={src}
-                          alt=""
-                          loading="lazy"
-                        />
+                        <img key={src} src={src} alt="" loading="lazy" />
                       ))}
                     </div>
                   )}
@@ -89,13 +97,6 @@ export default function PartnersPage() {
                   <p className="partners-showcase-role">{p.role}</p>
                   <h2 className="partners-showcase-name">{p.name}</h2>
                   <p className="partners-showcase-short">{p.short}</p>
-                  <p className="partners-showcase-desc">{p.summary}</p>
-                  <p className="partners-showcase-desc">{p.body}</p>
-                  <ul className="partners-showcase-points">
-                    {p.points.map((point) => (
-                      <li key={point}>{point}</li>
-                    ))}
-                  </ul>
                   <a
                     href={p.href}
                     target="_blank"
@@ -117,8 +118,8 @@ export default function PartnersPage() {
           <Reveal className="partners-cta">
             <h2 className="partners-cta-title">Want to partner with Shift?</h2>
             <p className="partners-cta-sub">
-              Technology, legal, and delivery partners who want to take AI into
-              production with us.
+              Specialist AI technology providers who want to take serious
+              commercial AI into production with us.
             </p>
             <Button href="mailto:partnerships@shiftaitech.com">
               Talk partnerships
