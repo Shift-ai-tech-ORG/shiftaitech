@@ -22,9 +22,9 @@ const ROUTES = {
       'How Shift AI Tech funded Bitcoin prediction models, then cut the same rebuild by 82% with AI tooling. UK AI product studio.',
   },
   '/partners': {
-    title: 'Partners · Shift AI Tech',
+    title: 'AI Specialised Partners · Shift AI Tech',
     description:
-      'Strategic partners of Shift AI Tech, including RAMDVG for cryptographic tokenisation of real-world assets.',
+      'Shift partners with specialist AI technology providers. Including RAMDVG, a tokenisation asset exchange platform with cryptographically linked data cores.',
   },
   '/team': {
     title: 'Team · Shift AI Tech',
