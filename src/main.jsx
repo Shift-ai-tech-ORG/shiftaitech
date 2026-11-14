@@ -12,6 +12,7 @@ import OnboardingPage from './OnboardingPage.jsx'
 import WebsitesPage from './WebsitesPage.jsx'
 import PortfolioPage from './PortfolioPage.jsx'
 import ReferPage, { ReferSentPage } from './ReferPage.jsx'
+import PrivacyPage from './PrivacyPage.jsx'
 import NotFoundPage from './NotFoundPage.jsx'
 import Navigation from './components/Navigation.jsx'
 import Footer from './components/Footer.jsx'
@@ -55,6 +56,7 @@ function AppShell() {
         <Route path="/our-story" element={<OurStoryPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
         <Route path="/research/:paperId" element={<ResearchPaperPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       </PageFade>

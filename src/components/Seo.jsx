@@ -51,6 +51,11 @@ const ROUTES = {
     title: 'Start a Project · Shift AI Tech',
     description: 'Onboard with Shift AI Tech to scope and ship custom AI, automation, or a new website.',
   },
+  '/privacy': {
+    title: 'Privacy Notice · Shift AI Tech',
+    description:
+      'How Shift AI Technology Ltd collects, uses and protects personal data sent through shiftaitech.com, and your rights.',
+  },
   '/research/research-paper-3': {
     title: 'The AI Value Shift · Shift AI Tech',
     description:
@@ -345,6 +350,7 @@ const CRUMBS = {
   '/refer': 'Refer and Earn',
   '/team': 'Team',
   '/onboarding': 'Start a project',
+  '/privacy': 'Privacy notice',
   '/research/research-paper-3': 'The AI Value Shift',
 }
 

@@ -2363,6 +2363,19 @@
   box-shadow: 0 1px 0 #f87171;
 }
 
+.form-privacy-line {
+  margin: 0.75rem 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text-tertiary);
+}
+
+.form-privacy-line a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .contact-form-note {
   margin: -0.15rem 0 0;
   max-width: 28rem;

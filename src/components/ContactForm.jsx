@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { FORMS_ENDPOINT } from '../config/site'
 import { getActiveReferral } from '../lib/referral'
 
@@ -198,6 +199,9 @@ export default function ContactForm({ referralCode, defaultMessage = '', source,
         {loading ? 'Sending\u2026' : <><span>Send message</span> <ArrowRight size={16} /></>}
       </button>
       {note && <p className="contact-form-note">{note}</p>}
+      <p className="form-privacy-line">
+        We only use your details to reply to you. See our <Link to="/privacy">privacy notice</Link>.
+      </p>
       {error && (
         <p className="contact-form-error">
           {error}

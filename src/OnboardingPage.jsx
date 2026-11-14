@@ -246,6 +246,9 @@ export default function OnboardingPage() {
               {step === total - 1 ? (status === 'sending' ? 'Submitting…' : 'Submit') : 'Continue'}
             </button>
           </div>
+          <p className="form-privacy-line">
+            We only use your details to reply to you and scope your project. See our <Link to="/privacy">privacy notice</Link>.
+          </p>
         </div>
       </div>
       )}

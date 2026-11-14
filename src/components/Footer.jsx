@@ -27,8 +27,9 @@ export default function Footer() {
         </div>
         <div className="footer-meta">
           <a href="mailto:partnerships@shiftaitech.com" className="footer-nav-link">partnerships@shiftaitech.com</a>
-          <p>© 2026 Shift AI Technology Ltd · 17159725</p>
-          <p>Unit 14, The Maltings, Hall Road, Southminster, Essex CM0 7EQ</p>
+          <Link to="/privacy" className="footer-nav-link">Privacy notice</Link>
+          <p>© 2026 Shift AI Technology Ltd, registered in England and Wales, company no. 17159725.</p>
+          <p>Registered office: Unit 14, The Maltings Industrial Estate, Hall Road, Southminster, Essex CM0 7EQ.</p>
         </div>
       </div>
     </footer>

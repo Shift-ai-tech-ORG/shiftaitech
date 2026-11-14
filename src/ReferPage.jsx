@@ -425,7 +425,7 @@ function ReferForm() {
       </button>
       <p className="refer-privacy">
         Shift AI Tech uses these details only to contact the business and to pay you, and deletes them after 12 months
-        if no work goes ahead.
+        if no work goes ahead. See our <Link to="/privacy">privacy notice</Link>.
       </p>
     </form>
   )

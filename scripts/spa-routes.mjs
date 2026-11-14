@@ -104,6 +104,19 @@ const routes = {
       <p><a href="${SITE}/onboarding">https://shiftaitech.com/onboarding</a></p>
     `,
   },
+  privacy: {
+    title: 'Privacy Notice · Shift AI Tech',
+    description:
+      'How Shift AI Technology Ltd collects, uses and protects personal data sent through shiftaitech.com, and your rights.',
+    article: `
+      <h1>Privacy notice</h1>
+      <p>Last updated November 2026.</p>
+      <p>Shift AI Technology Ltd (company number 17159725, registered in England and Wales) is the controller of personal data sent through shiftaitech.com. Contact partnerships@shiftaitech.com.</p>
+      <p>We use details from our contact, onboarding and referral forms only to reply, scope work, contact referred businesses and pay referral commission. Processors: GitHub Pages (hosting, US), Amazon Web Services (form handling, London) and Google Workspace (email).</p>
+      <p>You can ask for access, correction, deletion, restriction or portability of your data, or object to its use. You can complain to the ICO at ico.org.uk or 0303 123 1113.</p>
+      <p><a href="${SITE}/privacy">https://shiftaitech.com/privacy</a></p>
+    `,
+  },
   'research/research-paper-3': {
     title: 'The AI Value Shift · Shift AI Tech',
     description:
@@ -143,6 +156,7 @@ const CRUMBS = {
   refer: 'Refer and Earn',
   team: 'Team',
   onboarding: 'Start a project',
+  privacy: 'Privacy notice',
   'research/research-paper-3': 'The AI Value Shift',
 }
 

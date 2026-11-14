@@ -1,0 +1,62 @@
+/* ─── Privacy notice ─────────────────────────────── */
+
+.privacy-section {
+  padding: calc(var(--nav-height) + 4rem) 0 6rem;
+  background: var(--bg-primary);
+}
+
+.privacy-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.privacy-updated {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  margin-bottom: 2.5rem;
+}
+
+.privacy-section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+  font-weight: 400;
+  color: var(--text-primary);
+  margin: 2.5rem 0 0.75rem;
+}
+
+.privacy-section p,
+.privacy-section li {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 68ch;
+}
+
+.privacy-section p + p {
+  margin-top: 0.75rem;
+}
+
+.privacy-section ul {
+  padding-left: 1.2rem;
+  margin: 0.5rem 0 0;
+}
+
+.privacy-section li + li {
+  margin-top: 0.5rem;
+}
+
+.privacy-section strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.privacy-section a {
+  color: var(--purple-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
