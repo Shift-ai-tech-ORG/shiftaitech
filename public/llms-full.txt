@@ -99,15 +99,11 @@ These are the sites listed on https://shiftaitech.com/websites. Names and sector
 
 - The Red Cow (Hospitality): https://theredcowchesterton.co.uk
 - Mixa Restaurant (Hospitality): https://www.mixarestaurant.com
-- The Greyhound Inn (Hospitality): https://www.thegreyhoundinnbrackley.co.uk
 - Ready4Refurb (Property): https://ready4refurb.com
 - A&D Roofing & Construction (Trades): https://aanddroofingsolutions.com
-- LJ Brown UK (Groundworks): https://ljbrownukltd.co.uk
 - LJ Plumbing & Heating (Trades): https://ljplumbing.co.uk
-- SMH Gas (Trades): https://smh-gas.vercel.app
 - Syd Wells Gambian Project (Charity): https://sydwellscharity.com
 - AP Creative Co (Creative): https://apcreativeco.co.uk
-- Shift AI Tech (AI Products): https://shiftaitech.com
 - BioSense (Health): https://bio-sense.ai
 - Braid (Compliance): https://usebraid.ai
 - Ground Six (Building & landscaping): https://groundsix.co.uk

@@ -214,7 +214,7 @@ export default function WebsitesPage() {
             <h2 className="ui-section-heading">All sites completed.</h2>
             <p className="section-intro">
               {COMPLETED_SITES.length} shipped builds across hospitality, trades,
-              property, finance, charity, compliance, and AI products.
+              property, charity, health and compliance.
             </p>
           </Reveal>
           <div className="websites-completed">
