@@ -102,7 +102,7 @@ const team = [
     bio: 'Jack is the technical driving force behind Shift AI, with extensive hands-on experience in AI engineering, software development and building complex digital products from the ground up. His track record spans AI-powered trading infrastructure, predictive modelling, intelligent automation and production-ready platforms. With expertise across machine learning, AI agents, cloud infrastructure and full-stack development, Jack combines deep technical knowledge with an entrepreneurial approach to problem-solving. At Shift AI, he leads product engineering and development, turning ambitious ideas into scalable, commercially viable technology, with a particular talent for taking projects from concept to deployment at speed.',
   },
   {
-    name: 'Darren ‘the Rev Share’ Bishop',
+    name: 'Darren Bishop',
     role: 'Head of Operations',
     photo: '/darren-bishop.webp',
     email: 'darren@shiftaitech.com',
