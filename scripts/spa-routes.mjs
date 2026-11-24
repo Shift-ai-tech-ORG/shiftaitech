@@ -13,19 +13,6 @@ const indexPath = join(dist, 'index.html')
 const SITE = 'https://shiftaitech.com'
 
 const routes = {
-  portfolio: {
-    title: 'Portfolio: websites and products | Shift AI',
-    description: 'The websites and products we have built, each live on its own domain.',
-    article: `
-      <h1>Everything we’ve built, live on the web.</h1>
-      <p>The websites and products we have built, each live on its own domain.</p>
-      <h2>Every site and product we’ve shipped</h2>
-      <ul>
-        ${COMPLETED_SITES.map((site) => `<li><a href="${site.url}">${site.name}</a>, ${site.sector}</li>`).join('\n        ')}
-      </ul>
-      <p><a href="${SITE}/portfolio">https://shiftaitech.com/portfolio</a></p>
-    `,
-  },
   websites: {
     title: 'AI Websites That Rank &amp; Convert | Shift AI Tech',
     description:
@@ -149,7 +136,6 @@ if (!existsSync(indexPath)) {
 const shell = readFileSync(indexPath, 'utf8')
 
 const CRUMBS = {
-  portfolio: 'Portfolio',
   websites: 'Websites',
   'our-story': 'Our Story',
   partners: 'Partners',
@@ -336,3 +322,9 @@ for (const [route, page] of Object.entries(routes)) {
   writeFileSync(join(dist, `${route}.html`), html)
   console.log(`postbuild: ${route}.html`)
 }
+
+// /portfolio was removed in November 2026. Old links land on /websites instead of the 404 page.
+const moved = `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>Moved · Shift AI Tech</title><link rel="canonical" href="${SITE}/websites"><meta name="robots" content="noindex, follow"><meta http-equiv="refresh" content="0; url=/websites"></head><body><p><a href="/websites">This page has moved to shiftaitech.com/websites</a></p></body></html>`
+mkdirSync(join(dist, 'portfolio'), { recursive: true })
+writeFileSync(join(dist, 'portfolio', 'index.html'), moved)
+writeFileSync(join(dist, 'portfolio.html'), moved)

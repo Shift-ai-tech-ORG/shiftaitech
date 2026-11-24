@@ -44,7 +44,6 @@ export default function Navigation() {
     { label: 'Studio', href: '/#studio', type: 'hash' },
     { label: 'Products', href: '/#products', type: 'hash' },
     { label: 'Team', href: '/#team', type: 'hash' },
-    { label: 'Portfolio', href: '/portfolio', type: 'route' },
     { label: 'Refer and Earn', href: '/refer', type: 'route' },
   ]
 

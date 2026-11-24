@@ -16,7 +16,6 @@ export default function Footer() {
             <a href="/#studio" className="footer-nav-link">Studio</a>
             <a href="/#products" className="footer-nav-link">Products</a>
             <a href="/#team" className="footer-nav-link">Team</a>
-            <Link to="/portfolio" className="footer-nav-link">Portfolio</Link>
             <Link to="/partners" className="footer-nav-link">Partners</Link>
             <Link to="/our-story" className="footer-nav-link">Our Story</Link>
             <Link to="/websites" className="footer-nav-link">Websites</Link>

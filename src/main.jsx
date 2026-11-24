@@ -1,6 +1,6 @@
 import { StrictMode, useEffect, useRef } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import TeamPage from './TeamPage.jsx'
@@ -10,7 +10,6 @@ import PartnersPage from './PartnersPage.jsx'
 import ResearchPaperPage from './ResearchPaperPage.jsx'
 import OnboardingPage from './OnboardingPage.jsx'
 import WebsitesPage from './WebsitesPage.jsx'
-import PortfolioPage from './PortfolioPage.jsx'
 import ReferPage, { ReferSentPage } from './ReferPage.jsx'
 import PrivacyPage from './PrivacyPage.jsx'
 import NotFoundPage from './NotFoundPage.jsx'
@@ -47,7 +46,7 @@ function AppShell() {
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/websites" element={<WebsitesPage />} />
-        <Route path="/portfolio" element={<PortfolioPage />} />
+        <Route path="/portfolio" element={<Navigate to="/websites" replace />} />
         <Route path="/refer" element={<ReferPage />} />
         <Route path="/refer/sent" element={<ReferSentPage />} />
         <Route path="/partners" element={<PartnersPage />} />

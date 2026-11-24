@@ -445,7 +445,7 @@ export default function ReferPage() {
             </p>
             <div className="refer-actions">
               <a href="#refer-form" className="refer-btn">Pass on a business</a>
-              <Link to="/portfolio" className="refer-link">
+              <Link to="/websites" className="refer-link">
                 See what we’ve built
               </Link>
             </div>
@@ -565,7 +565,7 @@ export function ReferSentPage() {
           </p>
           <div className="refer-actions">
             <Link to="/refer#refer-form" className="refer-btn" reloadDocument>Pass on another business</Link>
-            <Link to="/portfolio" className="refer-link">See what we’ve built</Link>
+            <Link to="/websites" className="refer-link">See what we’ve built</Link>
           </div>
         </div>
       </section>

@@ -9,7 +9,6 @@ Disambiguation: not Shift Technology (insurance AI at shift-technology.com), not
 ## Primary pages
 
 - [Home](https://shiftaitech.com/): The AI Shape-Shifters. Studio, products, team, and how to start a brief.
-- [Portfolio](https://shiftaitech.com/portfolio): Websites Shift AI has designed, built, and shipped.
 - [Websites](https://shiftaitech.com/websites): Brochure websites from £500, AED 2,500, or $650. Design, build, host, and SEO foundations. Extra development from £50/hr, AED 250/hr, or $65/hr. eCommerce and AI modules start with a free consultation, then scoped pricing. Start at partnerships@shiftaitech.com.
 - [Our Story](https://shiftaitech.com/our-story): How we funded neural models for Bitcoin prediction and cut rebuild cost 82% with AI tooling
 - [Partners](https://shiftaitech.com/partners): Specialist partners (RAMDVG, AP Creative Co) and infrastructure programmes (AWS Activate, NVIDIA Inception)

@@ -264,7 +264,7 @@ export default function App() {
             ))}
           </div>
           <p className="shape-more">
-            <Link to="/portfolio">See the websites we’ve shipped</Link>
+            <Link to="/websites">See the websites we’ve shipped</Link>
           </p>
         </Container>
       </section>
