@@ -34,7 +34,7 @@
 }
 
 .story-hero-art .breathing-field {
-  left: 42%;
+  left: 50%;
 }
 
 .story-hero-inner {
@@ -307,8 +307,7 @@
   }
 
   .story-hero-art .breathing-field {
-    left: 15%;
-    opacity: 0.65;
+    left: 42%;
   }
 
   .story-beat {

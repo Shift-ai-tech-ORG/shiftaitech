@@ -37,6 +37,11 @@
   left: 40%;
 }
 
+/* Price block sits over the surface: keep it quieter here */
+.websites-hero-art .breathing-field.is-ready {
+  opacity: 0.55;
+}
+
 .websites-hero-grid {
   position: relative;
   z-index: 5;
@@ -679,7 +684,7 @@
   }
 
   .websites-hero-art .breathing-field {
-    left: 15%;
+    left: 42%;
   }
 }
 
