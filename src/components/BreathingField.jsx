@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
+import { isMotionPaused, subscribeMotion } from '../lib/motion'
 
 const VERT = `
 attribute vec2 a_pos;
@@ -7,13 +8,15 @@ void main() {
 }
 `
 
-/* Kota fluid river - vertical paint streams, Shift purple palette */
+/* Lit liquid-metal surface: a height field with a real light, slow swell and a pointer ripple.
+   Near-black graphite with one purple spot. Pattern borrowed from the QLM sector materials. */
 const FRAG = `
 precision highp float;
 uniform vec2 u_res;
 uniform float u_time;
 uniform vec2 u_mouse;
 uniform float u_intensity;
+uniform float u_reach;
 
 float hash(vec2 p) {
   return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
@@ -33,7 +36,7 @@ float noise(vec2 p) {
 float fbm(vec2 p) {
   float v = 0.0;
   float a = 0.5;
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 4; i++) {
     v += a * noise(p);
     p = mat2(1.6, 1.2, -1.2, 1.6) * p;
     a *= 0.5;
@@ -41,66 +44,54 @@ float fbm(vec2 p) {
   return v;
 }
 
-// One flowing ribbon - distance to a warped vertical curve
-float ribbon(vec2 p, float x0, float w, float t, float phase) {
-  float bend = sin(p.y * 1.8 + t * 0.7 + phase) * 0.16
-             + sin(p.y * 3.6 - t * 1.1 + phase * 1.7) * 0.07;
-  float warp = (fbm(vec2(p.x * 1.2 + phase, p.y * 1.1 - t * 0.45)) - 0.5) * 0.28;
-  float d = abs(p.x - x0 - bend - warp);
-  return smoothstep(w, 0.0, d);
+vec2 g_m;
+float g_t;
+
+float height(vec2 p) {
+  vec2 q = p * 2.2;
+  float w = fbm(q + vec2(0.0, g_t * 0.35));
+  float h = fbm(q * 1.3 + w * 1.6 - vec2(g_t * 0.2, 0.0));
+  float d = length(p - g_m);
+  float ripple = sin(d * 18.0 - g_t * 2.4) * exp(-d * 3.2) * 0.05;
+  return h * 0.55 + ripple;
 }
 
 void main() {
   vec2 uv = gl_FragCoord.xy / u_res;
   float aspect = u_res.x / u_res.y;
   vec2 p = vec2((uv.x - 0.5) * aspect, uv.y - 0.5);
-  vec2 m = vec2((u_mouse.x - 0.5) * aspect, u_mouse.y - 0.5);
+  g_m = vec2((u_mouse.x - 0.5) * aspect, u_mouse.y - 0.5);
+  g_t = u_time;
 
-  float t = u_time * 0.25;
-  // Anchor river in the canvas (canvas already sits on the right via CSS)
-  p.x -= 0.05 + m.x * 0.06;
-  p.y -= m.y * 0.04;
+  float e = 0.004;
+  float h = height(p);
+  float hx = height(p + vec2(e, 0.0)) - h;
+  float hy = height(p + vec2(0.0, e)) - h;
+  vec3 n = normalize(vec3(-hx / e * 0.7, -hy / e * 0.7, 1.0));
 
-  // Vertical paint streams
-  float r1 = ribbon(p, 0.00, 0.38, t, 0.0);
-  float r2 = ribbon(p, 0.2, 0.26, t, 2.1);
-  float r3 = ribbon(p, -0.18, 0.24, t, 4.0);
-  float r4 = ribbon(p, 0.36, 0.16, t, 1.3);
+  vec3 L = normalize(vec3(g_m.x - p.x + 0.35, g_m.y - p.y + 0.5, 0.55));
+  vec3 V = vec3(0.0, 0.0, 1.0);
+  float diff = clamp(dot(n, L), 0.0, 1.0);
+  vec3 H = normalize(L + V);
+  float spec = pow(clamp(dot(n, H), 0.0, 1.0), 70.0);
+  float rim = pow(1.0 - clamp(n.z, 0.0, 1.0), 2.0);
 
-  float flow = fbm(vec2(p.x * 2.0, p.y * 3.2 - t * 1.2));
-  float flow2 = fbm(vec2(p.x * 3.5 + 2.0, p.y * 5.0 - t * 1.8));
+  vec3 base = vec3(0.06, 0.055, 0.08);
+  vec3 purple = vec3(0.62, 0.36, 1.0);
+  vec3 col = base + diff * vec3(0.07, 0.06, 0.1);
+  col += purple * rim * 1.1;
+  col += purple * 0.9 * spec + vec3(0.9, 0.85, 1.0) * spec * 0.7;
 
-  r1 *= 0.7 + flow * 0.55;
-  r2 *= 0.6 + flow2 * 0.6;
-  r3 *= 0.55 + flow * 0.5;
-  r4 *= 0.5 + flow2 * 0.55;
-
-  float veil = smoothstep(-0.85, -0.05, p.y) * smoothstep(0.9, 0.0, p.y);
-
-  vec3 cDeep = vec3(0.35, 0.12, 0.78);
-  vec3 cPurple = vec3(0.72, 0.38, 1.0);
-  vec3 cLilac = vec3(0.88, 0.68, 1.0);
-  vec3 cMag = vec3(1.0, 0.32, 0.62);
-  vec3 cCool = vec3(0.38, 0.48, 1.0);
-  vec3 cSoft = vec3(0.95, 0.85, 1.0);
-
-  vec3 col = vec3(0.0);
-  col += cDeep * r1 * 1.15;
-  col += cPurple * r1 * (0.5 + flow * 0.5);
-  col += cMag * r2 * 1.15;
-  col += cCool * r3 * 1.0;
-  col += cLilac * r4 * 1.05;
-  col += cSoft * r1 * r2 * 0.4;
-
-  float body = (r1 * 1.15 + r2 * 0.95 + r3 * 0.8 + r4 * 0.65) * veil * u_intensity;
-  float alpha = clamp(body, 0.0, 0.98);
-
-  col = mix(col, col * 1.2, clamp(body, 0.0, 1.0));
-
-  float grain = (hash(gl_FragCoord.xy + floor(t * 8.0)) - 0.5) * 0.03;
-  col += grain;
-
-  gl_FragColor = vec4(col, alpha);
+  // Fade into the page so the left edge (under the type) stays clean
+  // Organic left edge: the surface holds the right side and spills leftwards in slow drips
+  float n1 = fbm(vec2(uv.y * 2.4, g_t * 0.1));
+  float n2 = fbm(vec2(uv.y * 7.0 + 3.0, g_t * 0.18 + 5.0));
+  float reach = u_reach - (n1 - 0.32) * 0.8 - (n2 - 0.5) * 0.16 - sin(g_t * 0.45) * 0.03;
+  float side = smoothstep(reach - 0.1, reach + 0.24, uv.x);
+  float edge = side * smoothstep(0.0, 0.14, uv.y) * smoothstep(0.0, 0.14, 1.0 - uv.y);
+  float alpha = clamp(edge * u_intensity, 0.0, 1.0);
+  col += (hash(gl_FragCoord.xy + floor(g_t * 8.0)) - 0.5) * 0.02;
+  gl_FragColor = vec4(col * alpha, alpha);
 }
 `
 
@@ -133,25 +124,10 @@ function createProgram(gl, vertSrc, fragSrc) {
 /**
  * Fluid river - Kota-style vertical paint streams in Shift purple.
  */
-export default function BreathingField({ className = '', interactive = true }) {
+export default function BreathingField({ className = '', interactive = true, reach = 0.16 }) {
   const canvasRef = useRef(null)
-  const [enabled, setEnabled] = useState(false)
-
   useEffect(() => {
-    const fine = window.matchMedia('(hover: hover) and (pointer: fine)')
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const update = () => setEnabled(fine.matches && !reduce.matches)
-    update()
-    fine.addEventListener('change', update)
-    reduce.addEventListener('change', update)
-    return () => {
-      fine.removeEventListener('change', update)
-      reduce.removeEventListener('change', update)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!enabled) return undefined
     const canvas = canvasRef.current
     if (!canvas) return undefined
 
@@ -175,6 +151,7 @@ export default function BreathingField({ className = '', interactive = true }) {
     const uTime = gl.getUniformLocation(program, 'u_time')
     const uMouse = gl.getUniformLocation(program, 'u_mouse')
     const uIntensity = gl.getUniformLocation(program, 'u_intensity')
+    const uReach = gl.getUniformLocation(program, 'u_reach')
 
     gl.useProgram(program)
     gl.enableVertexAttribArray(aPos)
@@ -189,18 +166,20 @@ export default function BreathingField({ className = '', interactive = true }) {
     let visible = !document.hidden
     let onScreen = true
     let ready = false
+    let drawn = false
 
     const resize = () => {
       const parent = canvas.parentElement
       const w = parent?.clientWidth || window.innerWidth
       const h = parent?.clientHeight || window.innerHeight
       // The canvas is CSS-blurred, so a retina buffer only multiplies the shader cost.
-      const dpr = 1
+      const dpr = window.matchMedia('(pointer: coarse)').matches ? 0.6 : 1
       canvas.width = Math.max(1, Math.floor(w * dpr))
       canvas.height = Math.max(1, Math.floor(h * dpr))
       canvas.style.width = `${w}px`
       canvas.style.height = `${h}px`
       gl.viewport(0, 0, canvas.width, canvas.height)
+      drawn = false
     }
 
     const onMove = (e) => {
@@ -223,7 +202,14 @@ export default function BreathingField({ className = '', interactive = true }) {
         raf = 0
         return
       }
-      raf = requestAnimationFrame(tick)
+      // Reduced motion or paused: hold one still frame
+      const frozen = reduce.matches || isMotionPaused()
+      if (frozen && drawn) {
+        raf = 0
+        return
+      }
+      drawn = true
+      raf = frozen ? 0 : requestAnimationFrame(tick)
 
       mouse.x += (target.x - mouse.x) * 0.05
       mouse.y += (target.y - mouse.y) * 0.05
@@ -235,6 +221,7 @@ export default function BreathingField({ className = '', interactive = true }) {
       gl.uniform1f(uTime, t)
       gl.uniform2f(uMouse, mouse.x, mouse.y)
       gl.uniform1f(uIntensity, 1)
+      gl.uniform1f(uReach, reach)
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
 
       if (!ready) {
@@ -254,28 +241,34 @@ export default function BreathingField({ className = '', interactive = true }) {
 
     resize()
     io.observe(canvas)
-    window.addEventListener('resize', resize)
+    const onResize = () => {
+      resize()
+      ensure()
+    }
+    window.addEventListener('resize', onResize)
     if (interactive) window.addEventListener('pointermove', onMove, { passive: true })
     document.addEventListener('visibilitychange', onVis)
+    const unsub = subscribeMotion(ensure)
+    reduce.addEventListener('change', ensure)
     ensure()
 
     return () => {
       cancelAnimationFrame(raf)
       io.disconnect()
-      window.removeEventListener('resize', resize)
+      unsub()
+      reduce.removeEventListener('change', ensure)
+      window.removeEventListener('resize', onResize)
       window.removeEventListener('pointermove', onMove)
       document.removeEventListener('visibilitychange', onVis)
       gl.deleteProgram(program)
       gl.deleteBuffer(buf)
     }
-  }, [enabled, interactive])
-
-  if (!enabled) return null
+  }, [interactive, reach])
 
   return (
     <canvas
       ref={canvasRef}
-      className={`breathing-field ${className}`.trim()}
+      className={`breathing-field breathing-field--lit ${className}`.trim()}
       aria-hidden="true"
     />
   )

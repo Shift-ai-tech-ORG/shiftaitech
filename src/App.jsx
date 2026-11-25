@@ -1,8 +1,10 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useLayoutEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 import { Container, Button } from './components/ui'
 import ContactForm from './components/ContactForm'
+import BreathingField from './components/BreathingField'
+import ShapeStory from './components/ShapeStory'
 import './App.css'
 import './HomePage.css'
 
@@ -117,34 +119,6 @@ const team = [
   },
 ]
 
-function HeroFilm() {
-  const [play, setPlay] = useState(false)
-
-  useEffect(() => {
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const save = navigator.connection && navigator.connection.saveData
-    if (!reduce && !save) setPlay(true)
-  }, [])
-
-  return (
-    <div className="shape-hero-media" aria-hidden="true">
-      <img src="/hero-poster.jpg" alt="" className="shape-hero-poster" />
-      {play && (
-        <video
-          className="shape-hero-video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/hero-poster.jpg"
-        >
-          <source src="/hero-loop.mp4" type="video/mp4" />
-        </video>
-      )}
-    </div>
-  )
-}
-
 function useProductStack() {
   useLayoutEffect(() => {
     const root = document.querySelector('.shape-ads')
@@ -188,7 +162,7 @@ export default function App() {
   return (
     <div className="shape-page">
       <section className="shape-hero">
-        <HeroFilm />
+        <BreathingField className="shape-hero-field" reach={0.58} />
         <Container>
           <div className="shape-hero-copy">
             <h1 className="shape-hero-title">
@@ -203,15 +177,22 @@ export default function App() {
         </Container>
       </section>
 
-      <section className="shape-band shape-sheet" id="studio">
-        <Container>
-          <h2 className="shape-statement">Good ideas don’t come in one <span className="shape-accent">shape</span>, and neither do we.</h2>
-          <div className="shape-prose">
-            <p>Every single business has its own challenges and ways of working. We believe that technology should fit the business, not the other way round.</p>
-            <p>At Shift AI, we take time to understand what our clients are looking to achieve before deciding how to get there. That could mean developing a completely new AI product, automating the work that slows your team down or finding a smarter way to use the systems you already have.</p>
-            <p className="shape-prose-strong">We’re not here to sell you AI for the sake of it. We’re here to build something worth having.</p>
-          </div>
-        </Container>
+      <section className="shape-band shape-sheet shape-stage-section" id="studio">
+        <div className="shape-stage-pin">
+          <Container>
+            <div className="shape-stage-grid">
+              <div className="shape-stage-copy">
+                <h2 className="shape-statement">Good ideas don’t come in one <span className="shape-accent">shape</span>, and neither do we.</h2>
+                <div className="shape-prose">
+                  <p>Every single business has its own challenges and ways of working. We believe that technology should fit the business, not the other way round.</p>
+                  <p>At Shift AI, we take time to understand what our clients are looking to achieve before deciding how to get there. That could mean developing a completely new AI product, automating the work that slows your team down or finding a smarter way to use the systems you already have.</p>
+                  <p className="shape-prose-strong">We’re not here to sell you AI for the sake of it. We’re here to build something worth having.</p>
+                </div>
+              </div>
+              <ShapeStory />
+            </div>
+          </Container>
+        </div>
       </section>
 
       <section className="shape-section shape-sheet">

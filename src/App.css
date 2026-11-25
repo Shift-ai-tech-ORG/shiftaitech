@@ -566,6 +566,12 @@
   opacity: 1;
 }
 
+/* Lit surface needs crisp highlights: no CSS blur */
+.breathing-field.breathing-field--lit {
+  filter: none;
+  transform: none;
+}
+
 @media (max-width: 900px) {
   .breathing-field {
     left: 20%;

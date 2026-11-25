@@ -411,7 +411,7 @@ export default function Seo() {
     const path = pathname.endsWith('/') && pathname !== '/' ? pathname.slice(0, -1) : pathname
     const known = Boolean(ROUTES[path])
     const page = ROUTES[path] || {
-      title: 'Page not found · Shift AI Tech',
+      title: path === '/refer/sent' ? 'Business received · Shift AI Tech' : 'Page not found · Shift AI Tech',
       description: 'That page is not on shiftaitech.com.',
     }
     const url = `${SITE}${path === '/' ? '/' : path}`

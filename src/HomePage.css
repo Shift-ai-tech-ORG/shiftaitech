@@ -50,6 +50,13 @@
     linear-gradient(180deg, rgba(9, 9, 11, 0.2) 0%, rgba(9, 9, 11, 0.72) 100%);
 }
 
+.shape-hero .shape-hero-field {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
 .shape-hero-copy {
   position: relative;
   z-index: 1;
@@ -721,4 +728,110 @@
   .shape-logos a {
     transition: none;
   }
+}
+
+/* Statement stage: copy on the left, one framed object on the right.
+   On wide screens the section pins for about two screens while the shape changes. */
+.shape-stage-grid {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.shape-stage {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  order: -1;
+}
+
+.shape-stage-canvas {
+  position: absolute;
+  inset: -12%;
+  width: 124%;
+  height: 124%;
+  opacity: 0;
+  transition: opacity 500ms ease-out;
+}
+
+.shape-stage-canvas.is-ready {
+  opacity: 1;
+}
+
+.shape-motion-toggle {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.8rem;
+  z-index: 2;
+  padding: 0.35rem 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  background: rgba(9, 9, 11, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.shape-motion-toggle:hover,
+.shape-motion-toggle:focus-visible {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.shape-hero-toggle {
+  right: 1.25rem;
+  bottom: 3.4rem;
+}
+
+@media (min-width: 960px) {
+  .shape-stage-section {
+    height: 260svh;
+    padding: 0;
+  }
+
+  .shape-stage-pin {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-top: var(--nav-height);
+  }
+
+  .shape-stage-pin > * {
+    width: 100%;
+  }
+
+  .shape-stage-grid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .shape-stage {
+    order: 0;
+    aspect-ratio: 1 / 1;
+    justify-self: end;
+    width: min(100%, 68svh);
+  }
+
+  /* The paragraph the current shape belongs to reads at full strength */
+  .shape-stage-section[data-step] .shape-prose p {
+    transition: opacity 400ms ease-out;
+  }
+
+  .shape-stage-section[data-step='1'] .shape-prose p:not(:nth-child(1)),
+  .shape-stage-section[data-step='2'] .shape-prose p:not(:nth-child(2)),
+  .shape-stage-section[data-step='3'] .shape-prose p:not(:nth-child(3)) {
+    opacity: 0.55;
+  }
+}
+
+@media (forced-colors: active) {
+  .shape-stage-canvas {
+    display: none;
+  }
+}
+
+.shape-stage-section {
+  overflow-x: clip;
 }

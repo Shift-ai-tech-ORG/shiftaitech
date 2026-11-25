@@ -24,7 +24,7 @@ const specialistPartners = [
     id: 'ap-creative',
     name: 'Anthony Parry',
     studio: 'AP Creative Co',
-    role: 'Specialist partner — social, content, design, print, web, events',
+    role: 'Specialist partner: social, content, design, print, web, events',
     sector: 'Creative',
     short: 'Founder-led creative. You talk to Anthony.',
     body: [
